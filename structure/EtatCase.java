@@ -1,4 +1,4 @@
-package jeu;
+package structure;
 
 public enum EtatCase {
     ROUGE('R'),
