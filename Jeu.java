@@ -1,4 +1,8 @@
+import structure.EtatCase;
 import structure.Joueur;
+
+import static jeu.Initialiser.saisirCouleur;
+
 
 public class Jeu {
 

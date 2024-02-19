@@ -11,4 +11,5 @@ public class Joueur {
     }
     public int getScore() {return score;}
     public void setColor(EtatCase color){ this.couleur = color; }
+    public EtatCase getColor(){return this.couleur;}
 }
