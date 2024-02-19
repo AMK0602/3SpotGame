@@ -1,3 +1,4 @@
+import jeu.GestionJeu;
 import structure.EtatCase;
 import structure.Joueur;
 
@@ -5,7 +6,6 @@ import static jeu.Initialiser.saisirCouleur;
 
 
 public class Jeu {
-
     public static void main (String[] args){
         System.out.println("Hello world !");
         // Exemple génération de joueur
@@ -13,5 +13,6 @@ public class Jeu {
         // ajouter assert pour verifier que c'est bien UNIQUEMENT BLEU OU ROUGE
         Joueur j1 = new Joueur();
         j1.setColor(saisirCouleur());
+        GestionJeu.jouerJeu();
     }
 }
