@@ -33,4 +33,20 @@ public class Initialiser {
      */
     public static void initTable(EtatCase[][] table){ // remplacer par non-static void par la suite
     }
+    public enum Status{ROUGE,BLEU,BLANC,LIBRE}
+    Status[][] table = new Status[3][3];
+
+    public void InitPosition(Status[][] table){
+        table[0][0] = Status.ROUGE;
+        table[0][1] = Status.ROUGE;
+        table[0][2] = Status.LIBRE;
+
+        table[1][0] = Status.BLANC;
+        table[1][1] = Status.BLANC;
+        table[1][2] = Status.LIBRE;
+
+        table[2][0] = Status.BLEU;
+        table[2][1] = Status.BLEU;
+        table[2][2] = Status.LIBRE;
+    }
 }
