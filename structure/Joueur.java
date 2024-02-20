@@ -32,4 +32,17 @@ public class Joueur {
      * @return score : La couleur du joueur indiqué
      */
     public EtatCase getColor(){return this.couleur;}
+
+    /**
+     * Vérification si un joueur a pris une couleur déjà choisi
+     * @param j : le joueur à comparer
+     * @return true : si la couleur a déjà été choisi.
+     */
+    public boolean hasSameColor(Joueur j) {
+        if(this.couleur == j.couleur){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
