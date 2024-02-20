@@ -32,21 +32,22 @@ public class Initialiser {
      * Permet d'initialiser le plateau de jeu avec les différentes pièces placées
      */
     public static void initTable(EtatCase[][] table){ // remplacer par non-static void par la suite
+        table[0][0] = EtatCase.LIBRE;
+        table[0][1] = EtatCase.ROUGE;
+        table[0][2] = EtatCase.ROUGE;
+
+        table[1][0] = EtatCase.LIBRE;
+        table[1][1] = EtatCase.NEUTRE;
+        table[1][2] = EtatCase.NEUTRE;
+
+        table[2][0] = EtatCase.LIBRE;
+        table[2][1] = EtatCase.BLEU;
+        table[2][2] = EtatCase.BLEU;
     }
-    public enum Status{ROUGE,BLEU,BLANC,LIBRE}
+    /*public enum Status{ROUGE,BLEU,BLANC,LIBRE}
     Status[][] table = new Status[3][3];
 
     public void InitPosition(Status[][] table){
-        table[0][0] = Status.ROUGE;
-        table[0][1] = Status.ROUGE;
-        table[0][2] = Status.LIBRE;
 
-        table[1][0] = Status.BLANC;
-        table[1][1] = Status.BLANC;
-        table[1][2] = Status.LIBRE;
-
-        table[2][0] = Status.BLEU;
-        table[2][1] = Status.BLEU;
-        table[2][2] = Status.LIBRE;
-    }
+    }*/
 }
