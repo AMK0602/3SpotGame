@@ -1,5 +1,8 @@
 package structure;
 
+import jeu.GestionJeu;
+import jeu.MouvementsJoueurs;
+
 public class Joueur {
     /** Identifiant du joueur */
     private int identifiant;
@@ -44,5 +47,9 @@ public class Joueur {
         } else {
             return false;
         }
+    }
+
+    public void jouerTour() {
+        MouvementsJoueurs.deplacerPiece(GestionJeu.getTableJeu(), this);
     }
 }

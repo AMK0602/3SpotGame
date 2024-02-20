@@ -15,7 +15,7 @@ public class GestionJeu {
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu
      */
-    public static void jouerJeu(){
+    public void jouerJeu(){
         //TODO: créer une instance avec Initialiser pour pouvoir appeler les fonctions de manières plus opti
         tablejeu = initTable();
         listejoueur = initJoueurs();
@@ -23,21 +23,17 @@ public class GestionJeu {
         for(int i=0; i<listejoueur.size();++i){
             System.out.println(listejoueur.get(i).getColor().toString());
         }
+        for(int i=0; i<listejoueur.size();++i){
+            listejoueur.get(i).jouerTour();
+        }
+        while(!jeuTermine()){
+
+        }
     }
 
-    /*public static void afficherTable(){
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*     "+tablejeu[0][0].getAlias()+"     *     "+tablejeu[0][1].getAlias()+"     *     "+tablejeu[0][2].getAlias()+"     * ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*     "+tablejeu[1][0].getAlias()+"     *     "+tablejeu[1][1].getAlias()+"     *     "+tablejeu[1][2].getAlias()+"     * ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*     "+tablejeu[2][0].getAlias()+"     *     "+tablejeu[2][1].getAlias()+"     *     "+tablejeu[2][2].getAlias()+"     * ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
-    }*/
+    public static boolean jeuTermine(){
+        // check des points
+        return true;
+    }
+    public static EtatCase[][] getTableJeu() { return tablejeu;}
 }
