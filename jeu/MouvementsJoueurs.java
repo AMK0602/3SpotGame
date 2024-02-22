@@ -7,18 +7,26 @@ import java.util.Scanner;
 
 public class MouvementsJoueurs {
     private static int[][][] listMouvement; // Tableau des combinaisons possibles.
-    private static int[][] mouvementsPossibles;
-    private static int[][] combiPossible;
-    private static int[] indices; // DEFINIR UNE TAILLE AVEC UN COMPTEUR ?
     private static int compteurDeMvt= 0;
 
     public static boolean combiExist(EtatCase[][] table, int x1, int y1, int x2, int y2, Joueur joueur){
         int lim_x = table.length;
         int lim_y = table[0].length;
+        // x1=0 y1=0
 
-        if((((x1 >= 0 && x1<lim_x) && (y1>=0 && y1<lim_y)) && ((x2>=0 && x2<lim_x)&&(y2>=0 && y2<lim_y))) && table[x1][y1] == EtatCase.LIBRE && (table[x2][y2] == EtatCase.LIBRE || table[x2][y2] == joueur.getColor())){
+        if((((x1 >= 0 && x1<lim_x) && (y1>=0 && y1<lim_y)) && ((x2>=0 && x2<lim_x)&&(y2>=0 && y2<lim_y))) && (table[x1][y1] == EtatCase.LIBRE && (table[x2][y2] == EtatCase.LIBRE || table[x2][y2] == joueur.getColor()))){
             return true;
         }
+        return false;
+    }
+    public static boolean estAdjacent(EtatCase[][] table, int x1, int y1, int x2, int y2){
+        int lim_x = table.length;
+        int lim_y = table[0].length;
+        if((((x1 >= 0 && x1<lim_x) && (y1>=0 && y1<lim_y)) && ((x2>=0 && x2<lim_x)&&(y2>=0 && y2<lim_y)))){
+            // verif case adjacente
+            return (x2 == x1 + 1 && y2 == y1) || (x2 == x1 && y2 == y1 + 1);
+        }
+
         return false;
     }
     public static boolean isMvtPossible(EtatCase[][] table, int ligne, int colonne, Joueur joueur) {
@@ -61,7 +69,17 @@ public class MouvementsJoueurs {
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table[0].length; j++) {
                 if (isMvtPossible(table, i, j, joueur)) {
-                    compteurDeMvt++;
+                    if (combiExist(table, i, j, i, j + 1, joueur)) {
+                        compteurDeMvt++;
+                    }
+                    if (combiExist(table, i, j, i + 1, j, joueur)) {
+                        compteurDeMvt++;
+                    }/*
+                    if (estAdjacent(table, i, j, i, j + 1)) {
+
+                    } else if (estAdjacent(table, i, j, i + 1, j)) {
+
+                    }*/
                 }
             }
         }
@@ -77,24 +95,34 @@ public class MouvementsJoueurs {
     public static int[][][] calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
         listMouvement = new int[compteMvtPossibles(table, joueur)][2][2];
         int compteur = 0;
+
         for (int i = 0; i < table.length; i++) {
-            //TODO debug ici : j doit etre adjacent a i
             for (int j = 0; j < table[0].length; j++) {
+                // Retenir le couple du mouvement possible sous forme ([0][0], [0][1])
                 if (isMvtPossible(table, i, j, joueur)) {
-                    // Retenir le couple du mouvement possible sous forme ([0][0], [0][1])
-                    listMouvement[compteur][0][0] = i; // ligne1
-                    listMouvement[compteur][0][1] = j; // colonne1
-                    //TODO debug ici
-                    if(combiExist(table, i, j,i+1,j, joueur)){
-                        listMouvement[compteur][1][0] = i+1; // ligne2
-                        listMouvement[compteur][1][1] = j; // colonne2
-                    }
-                    if(combiExist(table, i, j,i,j+1, joueur)){
+                    if (combiExist(table, i, j, i, j + 1, joueur)) {
+                        listMouvement[compteur][0][0] = i; // ligne1
+                        listMouvement[compteur][0][1] = j; // colonne1
                         listMouvement[compteur][1][0] = i; // ligne2
-                        listMouvement[compteur][1][1] = j+1; // colonne2
+                        listMouvement[compteur][1][1] = j + 1; // colonne2
+                        System.out.println(compteur);
+                        ++compteur;
                     }
-                    ++compteur;
+                    if (combiExist(table, i, j, i + 1, j, joueur)) {
+                        listMouvement[compteur][0][0] = i; // ligne1
+                        listMouvement[compteur][0][1] = j; // colonne1
+                        listMouvement[compteur][1][0] = i + 1; // ligne2
+                        listMouvement[compteur][1][1] = j; // colonne2
+                        System.out.println(compteur);
+                        ++compteur;
+                    }/*
+                    if (estAdjacent(table, i, j, i, j + 1)) {
+
+                    } else if (estAdjacent(table, i, j, i + 1, j)) {
+
+                    }*/
                 }
+
             }
         }
 
@@ -112,14 +140,14 @@ public class MouvementsJoueurs {
         System.out.print("Quel déplacement souhaitez-vous faire ? ");
         String resultat = sc.next();
         int numero = Integer.parseInt(resultat);
-        for (int i = 0; i < combiPossible.length; ++i) {
+        /*for (int i = 0; i < combiPossible.length; ++i) {
             for(int j = 0; j<combiPossible.length;++j){
                 if (combiPossible[i][j] == numero) {
                     return;
                     // Mettre à jour la position
                 }
             }
-        }
+        }*/
         System.out.println("Numéro invalide !");
     }
     public static void afficherDeplacements(int[][][] tableau) {

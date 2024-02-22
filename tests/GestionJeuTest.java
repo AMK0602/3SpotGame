@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import static jeu.AffichageTable.afficherTable;
 import static jeu.Initialiser.*;
+import static jeu.MouvementsJoueurs.afficherDeplacements;
+import static jeu.MouvementsJoueurs.calcDeplacementPossible;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GestionJeuTest {
@@ -36,4 +38,17 @@ class GestionJeuTest {
         afficherTable(tablejeu);
     }
 
+    @Test
+    public void testCalcMovement(){
+        EtatCase[][] tablejeu;
+        tablejeu = initTable();
+        ArrayList<Joueur> listejoueur = new ArrayList<Joueur>();
+        Joueur j1 = new Joueur();
+        Joueur j2 = new Joueur();
+        j1.setColor(EtatCase.ROUGE);
+        j2.setColor(EtatCase.BLEU);
+        listejoueur.add(j1);
+        listejoueur.add(j2);
+        afficherDeplacements(calcDeplacementPossible(tablejeu, j1));
+    }
 }
