@@ -23,8 +23,10 @@ public class GestionJeu {
         for(int i=0; i<listejoueur.size();++i){
             System.out.println(listejoueur.get(i).getColor().toString());
         }
-        for(int i=0; i<listejoueur.size();++i){
+        for(int i=0; i<listejoueur.size()-1;++i){
             listejoueur.get(i).jouerTour();
+            listejoueur.get(2).jouerTour();
+
         }
         while(!jeuTermine()){
 

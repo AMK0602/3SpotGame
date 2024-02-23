@@ -15,14 +15,17 @@ public class Initialiser {
     public static ArrayList<Joueur> initJoueurs(){
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
+        Joueur j3 = new Joueur();
         j1.setColor(saisirCouleur());
         j2.setColor(saisirCouleur());
+        j3.setColor(EtatCase.NEUTRE);
         while(j2.hasSameColor(j1)){
             j2.setColor(saisirCouleur());
         }
         ArrayList<Joueur> listejoueur = new ArrayList<Joueur>();
         listejoueur.add(j1);
         listejoueur.add(j2);
+        listejoueur.add(j3);
         return listejoueur;
     }
 
