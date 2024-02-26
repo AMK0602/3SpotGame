@@ -70,6 +70,17 @@ public class Initialiser {
         return table;
     }
 
+    public static ArrayList<Pion> initPion(){
+        Pion pion1 = new Pion(0,2);
+        Pion pion2 = new Pion(1,2);
+        Pion pion3 = new Pion(2,2);
+        ArrayList<Pion> listepion = new ArrayList<Pion>();
+        listepion.add(pion1);
+        listepion.add(pion2);
+        listepion.add(pion3);
+        return listepion;
+    }
+
     /**
      * Vérifie si la couleur est une couleur valide
      * @param couleur : la couleur saisie par le joueur

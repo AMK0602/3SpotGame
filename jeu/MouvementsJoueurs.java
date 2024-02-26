@@ -7,6 +7,8 @@ import structure.Joueur;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static jeu.AffichageTable.afficherTable;
+
 public class MouvementsJoueurs {
     private static ArrayList<CombinaisonPossible> listCombinaison;
 
@@ -64,13 +66,13 @@ public class MouvementsJoueurs {
                     if (combiExist(table, i, j, i, j + 1, joueur)) {
                         CombinaisonPossible combinaison = new CombinaisonPossible(i,j,i,j+1);
                         listCombinaison.add(combinaison);
-                        System.out.println(compteur+1);
+                        //System.out.println(compteur+1);
                         ++compteur;
                     }
                     if (combiExist(table, i, j, i + 1, j, joueur)) {
                         CombinaisonPossible combinaison = new CombinaisonPossible(i,j,i+1,j);
                         listCombinaison.add(combinaison);
-                        System.out.println(compteur+1);
+                        //System.out.println(compteur+1);
                         ++compteur;
                     }
                 }
@@ -86,31 +88,41 @@ public class MouvementsJoueurs {
     public static void deplacerPiece(EtatCase[][] table, Joueur joueur) {
         // afficher table des mouvements possibles
         Scanner sc = new Scanner(System.in);
-        afficherDeplacements(calcDeplacementPossible(table, joueur));  // Utilise la nouvelle fonction pour afficher les combinaisons
+
         System.out.print("Quel déplacement souhaitez-vous faire ? ");
         String resultat = sc.next();
         int numero = Integer.parseInt(resultat)-1;
-        if(numero <= listCombinaison.size() && numero > 0){
-          for(int i =0;i<table.length;i++){
-              for(int j=0;j<table.length;j++){
-                  if(table[i][j] == joueur.getColor()){
-                      table[i][j] = EtatCase.LIBRE;
-                  }
-              }
-          }
-          table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = joueur.getColor();
-          table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = joueur.getColor();
-
-
-        }
-        else {
-            System.out.println("Numéro invalide !");
+        if(numero <= listCombinaison.size() && numero >= 0){
+            for(int i =0;i<table.length;i++){
+                for(int j=0;j<table.length;j++){
+                    if(table[i][j] == joueur.getColor()){
+                        table[i][j] = EtatCase.LIBRE;
+                    }
+                }
+            }
+            table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = joueur.getColor();
+            table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = joueur.getColor();
+        }else {
+            deplacerPiece(table, joueur);
         }
     }
 
+    public static void calculerPointGagne(EtatCase[][] tablejeu, ArrayList<Pion> listePion, Joueur joueur) {
+        for (int i=0; i< tablejeu.length;++i){
+            for (int j=0; j< tablejeu.length;++j){
+                if(tablejeu[i][j]== joueur.getColor()){
+                    for(Pion pion : listePion){
+                        if(pion.getX() == i && pion.getY() ==j){
+                            joueur.incrementScore();
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public static void afficherDeplacements(ArrayList<CombinaisonPossible> tableau) {
-        System.out.println("Couples de déplacements possibles : ");
+        //System.out.println("Couples de déplacements possibles : ");
         for (int i = 0; i < tableau.size(); ++i) {
             int id_mouv = i+1;
             System.out.println("Le mouvement "+id_mouv+" est : ([" + tableau.get(i).getX1() + "][" + tableau.get(i).getY1() + "], [" + tableau.get(i).getX2() + "][" + tableau.get(i).getY2() + "])");

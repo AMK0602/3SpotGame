@@ -2,6 +2,9 @@ package structure;
 
 import jeu.GestionJeu;
 import jeu.MouvementsJoueurs;
+import jeu.Pion;
+
+import java.util.ArrayList;
 
 public class Joueur {
     /** Identifiant du joueur */
@@ -48,8 +51,21 @@ public class Joueur {
             return false;
         }
     }
-
-    public void jouerTour() {
-        MouvementsJoueurs.deplacerPiece(GestionJeu.getTableJeu(), this);
+    public boolean aGagneContre(Joueur j2){
+        if(score >= 12 && j2.getScore() >=6){
+            return true;
+        } else if (score <6 && j2.getScore()>=12){
+            return true;
+        } else {
+            return false;
+        }
     }
+    public void incrementScore(){
+        this.score+=1;
+    }
+    /*public void jouerTour() {
+        MouvementsJoueurs.deplacerPiece(GestionJeu.getTableJeu(), this);
+    }*/
+
+
 }
