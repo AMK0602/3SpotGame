@@ -89,9 +89,26 @@ public class MouvementsJoueurs {
         afficherDeplacements(calcDeplacementPossible(table, joueur));  // Utilise la nouvelle fonction pour afficher les combinaisons
         System.out.print("Quel déplacement souhaitez-vous faire ? ");
         String resultat = sc.next();
-        int numero = Integer.parseInt(resultat);
-        System.out.println("Numéro invalide !");
+        int numero = Integer.parseInt(resultat)-1;
+        if(numero <= listCombinaison.size() && numero > 0){
+          for(int i =0;i<table.length;i++){
+              for(int j=0;j<table.length;j++){
+                  if(table[i][j] == joueur.getColor()){
+                      table[i][j] = EtatCase.LIBRE;
+                  }
+              }
+          }
+          table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = joueur.getColor();
+          table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = joueur.getColor();
+
+
+        }
+        else {
+            System.out.println("Numéro invalide !");
+        }
     }
+
+
     public static void afficherDeplacements(ArrayList<CombinaisonPossible> tableau) {
         System.out.println("Couples de déplacements possibles : ");
         for (int i = 0; i < tableau.size(); ++i) {
