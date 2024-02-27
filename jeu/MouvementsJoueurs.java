@@ -3,11 +3,10 @@ package jeu;
 import structure.CombinaisonPossible;
 import structure.EtatCase;
 import structure.Joueur;
+import structure.Pion;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static jeu.AffichageTable.afficherTable;
 
 public class MouvementsJoueurs {
     private static ArrayList<CombinaisonPossible> listCombinaison;

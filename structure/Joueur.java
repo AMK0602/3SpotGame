@@ -1,11 +1,5 @@
 package structure;
 
-import jeu.GestionJeu;
-import jeu.MouvementsJoueurs;
-import jeu.Pion;
-
-import java.util.ArrayList;
-
 public class Joueur {
     /** Identifiant du joueur */
     private int identifiant;

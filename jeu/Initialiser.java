@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import structure.EtatCase;
 import structure.Joueur;
+import structure.Pion;
 
 public class Initialiser {
 

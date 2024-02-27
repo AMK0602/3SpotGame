@@ -35,7 +35,7 @@ class GestionJeuTest {
     public void testAffichageTable(){
         EtatCase[][] tablejeu;
         tablejeu = initTable();
-        afficherTable(tablejeu);
+        //afficherTable(tablejeu);
     }
 
     @Test

@@ -1,7 +1,9 @@
 package jeu;
 
+import structure.CombinaisonPossible;
 import structure.EtatCase;
 import structure.Joueur;
+import structure.Pion;
 
 import java.util.ArrayList;
 
@@ -13,6 +15,7 @@ public class GestionJeu {
     private static EtatCase[][] tablejeu;
     private static ArrayList<Pion> listePion;
     private static ArrayList<Joueur> listejoueur;
+    private static ArrayList<CombinaisonPossible> listeCombinaison;
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu
      */
@@ -24,13 +27,14 @@ public class GestionJeu {
 
         while(!jeuTermine()){
             for(int i=0; i<listejoueur.size()-1;++i){
+                listeCombinaison = calcDeplacementPossible(tablejeu, listejoueur.get(i));
                 System.out.println("JOUEUR "+listejoueur.get(i).getColor().getAlias());
-                afficherTable(tablejeu);
-                afficherDeplacements(calcDeplacementPossible(tablejeu, listejoueur.get(i)));
+                afficherTable(tablejeu, listeCombinaison);
+                afficherDeplacements(listeCombinaison);
                 deplacerPiece(tablejeu, listejoueur.get(i));
                 calculerPointGagne(tablejeu, listePion, listejoueur.get(i));
 
-                afficherTable(tablejeu);
+                afficherTable(tablejeu,listeCombinaison);
                 afficherDeplacements(calcDeplacementPossible(tablejeu, listejoueur.get(2)));
                 deplacerPiece(tablejeu, listejoueur.get(2));
 

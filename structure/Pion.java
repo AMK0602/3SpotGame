@@ -1,4 +1,4 @@
-package jeu;
+package structure;
 
 public class Pion {
     private int x;
