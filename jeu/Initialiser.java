@@ -10,10 +10,9 @@ public class Initialiser {
     /**
      * Initialiser 2 joueurs pour jouer au jeu
      * Permet également de choisir leurs couleurs
-     *
-     * @return
+     * @return listejoueur : la liste des joueurs qu'on a rempli.
      */
-    public static ArrayList<Joueur> initJoueurs(){
+    public static Joueur[] initJoueurs(){
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
         Joueur j3 = new Joueur();
@@ -23,11 +22,11 @@ public class Initialiser {
         while(j2.hasSameColor(j1)){
             j2.setColor(saisirCouleur());
         }
-        ArrayList<Joueur> listejoueur = new ArrayList<Joueur>();
-        listejoueur.add(j1);
-        listejoueur.add(j2);
-        listejoueur.add(j3);
-        return listejoueur;
+        Joueur[] listeJoueur = new Joueur[3];
+        listeJoueur[0] = j1;
+        listeJoueur[1] = j2;
+        listeJoueur[2] = j3;
+        return listeJoueur;
     }
 
     /**
@@ -54,6 +53,7 @@ public class Initialiser {
 
     /**
      * Permet d'initialiser le plateau de jeu avec les différentes pièces placées
+     * @return table : la table de jeu qu'on a rempli
      */
     public static EtatCase[][] initTable(){
         EtatCase[][] table = new EtatCase[3][3];
@@ -71,14 +71,18 @@ public class Initialiser {
         return table;
     }
 
-    public static ArrayList<Pion> initPion(){
+    /**
+     * Permet de créer les pions qui donne des points et de les placer dans une liste qu'on renvoie.
+     * @return listepion : la liste des pions qu'on a remplie
+     */
+    public static Pion[] initPion(){
         Pion pion1 = new Pion(0,2);
         Pion pion2 = new Pion(1,2);
         Pion pion3 = new Pion(2,2);
-        ArrayList<Pion> listepion = new ArrayList<Pion>();
-        listepion.add(pion1);
-        listepion.add(pion2);
-        listepion.add(pion3);
+        Pion[] listepion = new Pion[3];
+        listepion[0] = pion1;
+        listepion[1] = pion2;
+        listepion[2] = pion3;
         return listepion;
     }
 

@@ -5,7 +5,7 @@ public class Joueur {
     private int identifiant;
     /** Score du joueur*/
     private int score;
-    /** Couleur du joueur */
+    /** Couleur du joueur, correspondant a un Etat de case */
     private EtatCase couleur;
     /** Compteur du nombre de joueur dans la partie */
     private static int nbJoueur = 0;
@@ -23,15 +23,24 @@ public class Joueur {
     public int getScore() {return score;}
 
     /**
-     * Permet de définir la couleur de la pièce de quelqu'un
-     * @param color : la couleur choisi par le joueur
-     */
-    public void setColor(EtatCase color){ this.couleur = color; }
-    /**
      * Permet de récupérer la couleur d'un joueur donnée
      * @return score : La couleur du joueur indiqué
      */
     public EtatCase getColor(){return this.couleur;}
+
+    /**
+     * Permet de définir la couleur de la pièce de quelqu'un
+     * @param color : la couleur choisi par le joueur
+     */
+
+    public void setColor(EtatCase color){ this.couleur = color; }
+
+    /**
+     * Fonction qui permet d'incrémenter de 1 le score du joueur
+     */
+    public void incrementScore(){
+        this.score+=1;
+    }
 
     /**
      * Vérification si un joueur a pris une couleur déjà choisi
@@ -39,27 +48,17 @@ public class Joueur {
      * @return true : si la couleur a déjà été choisi.
      */
     public boolean hasSameColor(Joueur j) {
-        if(this.couleur == j.couleur){
-            return true;
-        } else {
-            return false;
-        }
+        return this.couleur == j.couleur;
     }
+
+    /**
+     * Fonction qui permet de vérifier si un joueur à gagner contre un autre joueur.
+     * @param j2 : Le joueur avec qui on souhaite comparer le score
+     * @return true si c'est le cas (score a 12 pour le premier joueur et score > 6 pour le second).
+     */
     public boolean aGagneContre(Joueur j2){
         if(score >= 12 && j2.getScore() >=6){
             return true;
-        } else if (score <6 && j2.getScore()>=12){
-            return true;
-        } else {
-            return false;
-        }
+        } else return score < 6 && j2.getScore() >= 12;
     }
-    public void incrementScore(){
-        this.score+=1;
-    }
-    /*public void jouerTour() {
-        MouvementsJoueurs.deplacerPiece(GestionJeu.getTableJeu(), this);
-    }*/
-
-
 }

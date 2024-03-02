@@ -5,7 +5,7 @@ import structure.EtatCase;
 import structure.Joueur;
 import structure.Pion;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static jeu.AffichageTable.afficherTable;
 import static jeu.Initialiser.*;
@@ -13,40 +13,42 @@ import static jeu.MouvementsJoueurs.*;
 
 public class GestionJeu {
     private static EtatCase[][] tablejeu;
-    private static ArrayList<Pion> listePion;
-    private static ArrayList<Joueur> listejoueur;
-    private static ArrayList<CombinaisonPossible> listeCombinaison;
+    private static Pion[] listePion;
+    private static Joueur[] listeJoueur;
+    private static LinkedList<CombinaisonPossible> listeCombinaison;
+
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu
      */
     public void jouerJeu(){
         //TODO: créer une instance avec Initialiser pour pouvoir appeler les fonctions de manières plus opti
         tablejeu = initTable();
-        listejoueur = initJoueurs();
+        listeJoueur = initJoueurs();
         listePion = initPion();
 
         while(!jeuTermine()){
-            for(int i=0; i<listejoueur.size()-1;++i){
-                listeCombinaison = calcDeplacementPossible(tablejeu, listejoueur.get(i));
-                System.out.println("JOUEUR "+listejoueur.get(i).getColor().getAlias());
+            for(int i=0; i<listeJoueur.length-1;++i){
+                listeCombinaison = calcDeplacementPossible(tablejeu, listeJoueur[i]);
+                System.out.println("JOUEUR "+ listeJoueur[i].getColor().getAlias());
                 afficherTable(tablejeu, listeCombinaison);
                 afficherDeplacements(listeCombinaison);
-                deplacerPiece(tablejeu, listejoueur.get(i));
-                calculerPointGagne(tablejeu, listePion, listejoueur.get(i));
+                deplacerPiece(tablejeu, listeJoueur[i]);
+                calculerPointGagne(tablejeu, listePion, listeJoueur[i]);
 
+                listeCombinaison = calcDeplacementPossible(tablejeu, listeJoueur[2]);
                 afficherTable(tablejeu,listeCombinaison);
-                afficherDeplacements(calcDeplacementPossible(tablejeu, listejoueur.get(2)));
-                deplacerPiece(tablejeu, listejoueur.get(2));
+                afficherDeplacements(listeCombinaison);
+                deplacerPiece(tablejeu, listeJoueur[2]);
 
             }
             System.out.println(" ");
             System.out.println("-------------------------------------");
-            System.out.println("Score du joueur "+ listejoueur.get(0).getColor().getAlias() +" : "+ listejoueur.get(0).getScore());
-            System.out.println("Score du joueur "+ listejoueur.get(1).getColor().getAlias() +" : "+ listejoueur.get(1).getScore());
+            System.out.println("Score du joueur "+ listeJoueur[0].getColor().getAlias() +" : "+ listeJoueur[0].getScore());
+            System.out.println("Score du joueur "+ listeJoueur[1].getColor().getAlias() +" : "+ listeJoueur[1].getScore());
             System.out.println("-------------------------------------");
             System.out.println(" ");
         }
-        compareScore(listejoueur.get(0), listejoueur.get(1));
+        compareScore(listeJoueur[0], listeJoueur[1]);
     }
 
 
@@ -60,10 +62,15 @@ public class GestionJeu {
 
 
     //TODO faire la doc et message quand le joueur a terminé la partie
+
+    /**
+     * Fonction qui vérifie si le jeu est terminé, si un des 2 joueurs à gagné contre l'autre
+     * @return true si un joueur à gagné la portie
+     */
     public static boolean jeuTermine(){
-        if(listejoueur.get(0).aGagneContre(listejoueur.get(1))){
+        if(listeJoueur[0].aGagneContre(listeJoueur[1])){
             return true;
-        } else return listejoueur.get(1).aGagneContre(listejoueur.get(0));
+        } else return listeJoueur[1].aGagneContre(listeJoueur[0]);
     }
 
     public static EtatCase[][] getTableJeu() { return tablejeu;}

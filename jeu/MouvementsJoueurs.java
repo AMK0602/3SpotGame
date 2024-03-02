@@ -6,23 +6,47 @@ import structure.Joueur;
 import structure.Pion;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class MouvementsJoueurs {
-    private static ArrayList<CombinaisonPossible> listCombinaison;
+    private static LinkedList<CombinaisonPossible> listCombinaison;
 
+    /**
+     * Fonction qui permet de vérifier qu'un mouvement est possible entre 2 cases
+     * @param table : la table de jeu
+     * @param x1 : ligne de la première case
+     * @param y1 : colonne de la première case
+     * @param x2 : ligne de la deuxième case
+     * @param y2 : colonne de la deuxième case
+     * @param joueur : le joueur a qui ont va récupérer la couleur
+     * @return
+     */
     public static boolean combiExist(EtatCase[][] table, int x1, int y1, int x2, int y2, Joueur joueur){
         int lim_x = table.length;
         int lim_y = table[0].length;
-        return (estAdjacent(table, x1, y1, x2, y2) && ((x1 >= 0 && x1 < lim_x) && (y1 >= 0 && y1 < lim_y)) && ((x2 >= 0 && x2 < lim_x) && (y2 >= 0 && y2 < lim_y))) && (table[x1][y1] == EtatCase.LIBRE && (table[x2][y2] == EtatCase.LIBRE || table[x2][y2] == joueur.getColor()));
+        return (estAdjacent(table, x1, y1, x2, y2) &&
+                ((x1 >= 0 && x1 < lim_x) && (y1 >= 0 && y1 < lim_y)) && // limite
+                    ((x2 >= 0 && x2 < lim_x) && (y2 >= 0 && y2 < lim_y))) && // limite
+                ((table[x1][y1] == EtatCase.LIBRE && (table[x2][y2] == EtatCase.LIBRE || table[x2][y2] == joueur.getColor())) ||
+                    (table[x1][y1] == joueur.getColor() && table[x2][y2] == EtatCase.LIBRE ));
     }
+
+    /**
+     * Vérifier que 2 cases sont bien adjacente pour vérifier le mouvement
+     * @param table : la table de jeu
+     * @param x1 : ligne de la première case
+     * @param y1 : colonne de la première case
+     * @param x2 : ligne de la deuxième case
+     * @param y2 : colonne de la deuxième case
+     * @return true si les cases sont adjacente, false si elles ne le sont pas
+     */
     public static boolean estAdjacent(EtatCase[][] table, int x1, int y1, int x2, int y2){
-        int lim_x = table.length;
-        int lim_y = table[0].length;
-        // verif case adjacente
         return (x2 == x1 + 1 && y2 == y1) || (x2 == x1 && y2 == y1 + 1);
     }
-    public static boolean isMvtPossible(EtatCase[][] table, int ligne, int colonne, Joueur joueur) {
+
+
+    /*public static boolean isMvtPossible(EtatCase[][] table, int ligne, int colonne, Joueur joueur) {
         int taill_ligne = table.length;
         int taille_col = table[0].length;
 
@@ -48,32 +72,28 @@ public class MouvementsJoueurs {
             return true;  // Déplacement possible vers la gauche
         }
         return false;
-    }
+    }*/
 
     /**
      * Permet de numérotter sur la case les déplacement possible
      * @param table : table de jeu
      * @param joueur : le joueur dont on souhaite calculer les déplacement possibles
      */
-    public static ArrayList<CombinaisonPossible> calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
-        listCombinaison = new ArrayList<>();
+    public static LinkedList<CombinaisonPossible> calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
+        listCombinaison = new LinkedList<>();
         int compteur = 0;
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table[0].length; j++) {
                 // Retenir le couple du mouvement possible sous forme ([0][0], [0][1])
-                if (isMvtPossible(table, i, j, joueur)) {
-                    if (combiExist(table, i, j, i, j + 1, joueur)) {
-                        CombinaisonPossible combinaison = new CombinaisonPossible(i,j,i,j+1);
-                        listCombinaison.add(combinaison);
-                        //System.out.println(compteur+1);
-                        ++compteur;
-                    }
-                    if (combiExist(table, i, j, i + 1, j, joueur)) {
-                        CombinaisonPossible combinaison = new CombinaisonPossible(i,j,i+1,j);
-                        listCombinaison.add(combinaison);
-                        //System.out.println(compteur+1);
-                        ++compteur;
-                    }
+                if (combiExist(table, i, j, i, j + 1, joueur)) {
+                    CombinaisonPossible combinaison = new CombinaisonPossible(i,j,i,j+1);
+                    listCombinaison.add(combinaison);
+                    ++compteur;
+                }
+                if (combiExist(table, i, j, i + 1, j, joueur)) {
+                    CombinaisonPossible combinaison = new CombinaisonPossible(i,j,i+1,j);
+                    listCombinaison.add(combinaison);
+                    ++compteur;
                 }
             }
         }
@@ -106,12 +126,12 @@ public class MouvementsJoueurs {
         }
     }
 
-    public static void calculerPointGagne(EtatCase[][] tablejeu, ArrayList<Pion> listePion, Joueur joueur) {
+    public static void calculerPointGagne(EtatCase[][] tablejeu, Pion[] listePion, Joueur joueur) {
         for (int i=0; i< tablejeu.length;++i){
             for (int j=0; j< tablejeu.length;++j){
                 if(tablejeu[i][j]== joueur.getColor()){
-                    for(Pion pion : listePion){
-                        if(pion.getX() == i && pion.getY() ==j){
+                    for(int k=0; k<listePion.length;++k){
+                        if(listePion[k].getX() == i && listePion[k].getY() ==j){
                             joueur.incrementScore();
                         }
                     }
@@ -120,7 +140,7 @@ public class MouvementsJoueurs {
         }
     }
 
-    public static void afficherDeplacements(ArrayList<CombinaisonPossible> tableau) {
+    public static void afficherDeplacements(LinkedList<CombinaisonPossible> tableau) {
         //System.out.println("Couples de déplacements possibles : ");
         for (int i = 0; i < tableau.size(); ++i) {
             int id_mouv = i+1;

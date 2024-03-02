@@ -8,6 +8,8 @@ public enum EtatCase {
 
     /** Raccourcis/Alias utilisé par une couleur pour l'affichage de la table */
     private char alias;
+
+    /** Constructeur de l'Enumération */
     EtatCase(char alias){
         this.alias = alias;
     }
