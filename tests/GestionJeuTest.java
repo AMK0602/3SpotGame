@@ -5,8 +5,6 @@ import structure.EtatCase;
 import structure.Joueur;
 
 import java.util.ArrayList;
-
-import static jeu.AffichageTable.afficherTable;
 import static jeu.Initialiser.*;
 import static jeu.MouvementsJoueurs.afficherDeplacements;
 import static jeu.MouvementsJoueurs.calcDeplacementPossible;

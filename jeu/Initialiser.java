@@ -1,5 +1,4 @@
 package jeu;
-import java.util.ArrayList;
 import java.util.Scanner;
 import structure.EtatCase;
 import structure.Joueur;
@@ -98,11 +97,4 @@ public class Initialiser {
             return false;
         }
     }
-
-    /*public enum Status{ROUGE,BLEU,BLANC,LIBRE}
-    Status[][] table = new Status[3][3];
-
-    public void InitPosition(Status[][] table){
-
-    }*/
 }

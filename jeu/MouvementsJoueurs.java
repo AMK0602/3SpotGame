@@ -4,12 +4,11 @@ import structure.CombinaisonPossible;
 import structure.EtatCase;
 import structure.Joueur;
 import structure.Pion;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class MouvementsJoueurs {
+    /** Liste qui stocke les mouvements possibles d'un joueur */
     private static LinkedList<CombinaisonPossible> listCombinaison;
 
     /**
@@ -45,39 +44,11 @@ public class MouvementsJoueurs {
         return (x2 == x1 + 1 && y2 == y1) || (x2 == x1 && y2 == y1 + 1);
     }
 
-
-    /*public static boolean isMvtPossible(EtatCase[][] table, int ligne, int colonne, Joueur joueur) {
-        int taill_ligne = table.length;
-        int taille_col = table[0].length;
-
-        //TODO simplifier la vérification en isMvtExist > verifie la case adjacente si EtatCase=LIBRE ou COULEUR
-        if (ligne >= 0 && ligne < taill_ligne - 1 && colonne >= 0 && colonne < taille_col &&
-                (table[ligne][colonne] == EtatCase.LIBRE || table[ligne][colonne] == joueur.getColor()) &&
-                (table[ligne + 1][colonne] == EtatCase.LIBRE || table[ligne + 1][colonne] == joueur.getColor())) {
-            return true;  // Déplacement possible vers le bas
-        }
-        if (colonne >= 0 && colonne < taille_col - 1 && ligne >= 0 && ligne < taill_ligne &&
-                (table[ligne][colonne] == EtatCase.LIBRE || table[ligne][colonne] == joueur.getColor()) &&
-                (table[ligne][colonne + 1] == EtatCase.LIBRE || table[ligne][colonne + 1] == joueur.getColor())) {
-            return true;  // Déplacement possible vers la droite
-        }
-        if (ligne > 0 && ligne < taill_ligne && colonne >= 0 && colonne < taille_col &&
-                (table[ligne][colonne] == EtatCase.LIBRE || table[ligne][colonne] == joueur.getColor()) &&
-                (table[ligne - 1][colonne] == EtatCase.LIBRE || table[ligne - 1][colonne] == joueur.getColor())) {
-            return true;  // Déplacement possible vers le haut
-        }
-        if (colonne > 0 && colonne < taille_col && ligne >= 0 && ligne < taill_ligne &&
-                (table[ligne][colonne] == EtatCase.LIBRE || table[ligne][colonne] == joueur.getColor()) &&
-                (table[ligne][colonne - 1] == EtatCase.LIBRE || table[ligne][colonne - 1] == joueur.getColor())) {
-            return true;  // Déplacement possible vers la gauche
-        }
-        return false;
-    }*/
-
     /**
      * Permet de numérotter sur la case les déplacement possible
      * @param table : table de jeu
      * @param joueur : le joueur dont on souhaite calculer les déplacement possibles
+     * @return listCombinaison : la liste des combinaison possible qu'on a rempli
      */
     public static LinkedList<CombinaisonPossible> calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
         listCombinaison = new LinkedList<>();
@@ -103,6 +74,7 @@ public class MouvementsJoueurs {
     /**
      * l'utilisateur choisi un numéro et le déplacement est effectué en fonction de ce déplacement
      * @param table : table de jeu
+     * @param joueur :
      */
     public static void deplacerPiece(EtatCase[][] table, Joueur joueur) {
         // afficher table des mouvements possibles
@@ -126,6 +98,12 @@ public class MouvementsJoueurs {
         }
     }
 
+    /**
+     * Fonction qui permet de calculer le nombre de point gagné par un joueur. Vérifier si sa couleur est sur un pion
+     * @param tablejeu : la table de jeu
+     * @param listePion : la liste de position des pions qui rapporte des points
+     * @param joueur : le joueur dont on souhaite récupérer la couleur.
+     */
     public static void calculerPointGagne(EtatCase[][] tablejeu, Pion[] listePion, Joueur joueur) {
         for (int i=0; i< tablejeu.length;++i){
             for (int j=0; j< tablejeu.length;++j){
@@ -140,6 +118,10 @@ public class MouvementsJoueurs {
         }
     }
 
+    /**
+     * permet d'afficher la liste des mouvements possibles
+     * @param tableau : la liste des mouvements possibles avec les positions des cases
+     */
     public static void afficherDeplacements(LinkedList<CombinaisonPossible> tableau) {
         //System.out.println("Couples de déplacements possibles : ");
         for (int i = 0; i < tableau.size(); ++i) {

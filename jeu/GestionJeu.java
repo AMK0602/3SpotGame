@@ -12,13 +12,17 @@ import static jeu.Initialiser.*;
 import static jeu.MouvementsJoueurs.*;
 
 public class GestionJeu {
+    /** La table de jeu */
     private static EtatCase[][] tablejeu;
+    /** La liste des pions rapportant des points */
     private static Pion[] listePion;
+    /** La liste des joueurs */
     private static Joueur[] listeJoueur;
+    /** La listes des mouvements possibles avec les positions des cases */
     private static LinkedList<CombinaisonPossible> listeCombinaison;
 
     /**
-     * Fonction principale qui permet de gérer le bon déroulement du jeu
+     * Fonction principale qui permet de gérer le bon déroulement du jeu, d'une partie
      */
     public void jouerJeu(){
         //TODO: créer une instance avec Initialiser pour pouvoir appeler les fonctions de manières plus opti
@@ -51,7 +55,11 @@ public class GestionJeu {
         compareScore(listeJoueur[0], listeJoueur[1]);
     }
 
-
+    /**
+     * Permet de comparer le score de deux joueurs
+     * @param joueur1 : le premier joueur
+     * @param joueur2 : le deuxième joueur
+     */
     private static void compareScore(Joueur joueur1, Joueur joueur2) {
         if(joueur1.aGagneContre(joueur2)){ // J1 WIN
             System.out.println("Victoire du joueur 1");
@@ -59,9 +67,6 @@ public class GestionJeu {
             System.out.println("Victoire du joueur 2");
         }
     }
-
-
-    //TODO faire la doc et message quand le joueur a terminé la partie
 
     /**
      * Fonction qui vérifie si le jeu est terminé, si un des 2 joueurs à gagné contre l'autre
@@ -72,6 +77,4 @@ public class GestionJeu {
             return true;
         } else return listeJoueur[1].aGagneContre(listeJoueur[0]);
     }
-
-    public static EtatCase[][] getTableJeu() { return tablejeu;}
 }
