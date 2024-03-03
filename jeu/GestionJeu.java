@@ -1,30 +1,33 @@
 package jeu;
 
-import structure.CombinaisonPossible;
+import structure.Combinaison;
 import structure.EtatCase;
 import structure.Joueur;
 import structure.Pion;
 
 import java.util.LinkedList;
 
-import static jeu.AffichageTable.afficherTable;
+import static jeu.Affichage.afficherTable;
 import static jeu.Initialiser.*;
-import static jeu.MouvementsJoueurs.*;
+import static jeu.MouvementsPiece.*;
 
 public class GestionJeu {
+    /** La listes des mouvements possibles avec les positions des cases */
+    private static LinkedList<Combinaison> listeCombinaison;
     /** La table de jeu */
     private static EtatCase[][] tablejeu;
     /** La liste des pions rapportant des points */
     private static Pion[] listePion;
     /** La liste des joueurs */
     private static Joueur[] listeJoueur;
-    /** La listes des mouvements possibles avec les positions des cases */
-    private static LinkedList<CombinaisonPossible> listeCombinaison;
+
 
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu, d'une partie
      */
     public void jouerJeu(){
+        Calcul calcul = new Calcul();
+        Affichage affichage = new Affichage();
         //TODO: créer une instance avec Initialiser pour pouvoir appeler les fonctions de manières plus opti
         tablejeu = initTable();
         listeJoueur = initJoueurs();
@@ -32,17 +35,18 @@ public class GestionJeu {
 
         while(!jeuTermine()){
             for(int i=0; i<listeJoueur.length-1;++i){
-                listeCombinaison = calcDeplacementPossible(tablejeu, listeJoueur[i]);
+                listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[i]);
                 System.out.println("JOUEUR "+ listeJoueur[i].getColor().getAlias());
                 afficherTable(tablejeu, listeCombinaison);
-                afficherDeplacements(listeCombinaison);
-                deplacerPiece(tablejeu, listeJoueur[i]);
-                calculerPointGagne(tablejeu, listePion, listeJoueur[i]);
+                affichage.afficherDeplacements(listeCombinaison);
+                deplacerPiece(tablejeu, listeJoueur[i], listeCombinaison);
+                calcul.calculerPointGagne(tablejeu, listePion, listeJoueur[i]);
 
-                listeCombinaison = calcDeplacementPossible(tablejeu, listeJoueur[2]);
+                System.out.println("JOUEUR "+ listeJoueur[2].getColor().getAlias());
+                listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[2]);
                 afficherTable(tablejeu,listeCombinaison);
-                afficherDeplacements(listeCombinaison);
-                deplacerPiece(tablejeu, listeJoueur[2]);
+                affichage.afficherDeplacements(listeCombinaison);
+                deplacerPiece(tablejeu, listeJoueur[2], listeCombinaison);
 
             }
             System.out.println(" ");

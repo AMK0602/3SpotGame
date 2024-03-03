@@ -6,8 +6,6 @@ import structure.Joueur;
 
 import java.util.ArrayList;
 import static jeu.Initialiser.*;
-import static jeu.MouvementsJoueurs.afficherDeplacements;
-import static jeu.MouvementsJoueurs.calcDeplacementPossible;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GestionJeuTest {
@@ -47,6 +45,6 @@ class GestionJeuTest {
         j2.setColor(EtatCase.BLEU);
         listejoueur.add(j1);
         listejoueur.add(j2);
-        afficherDeplacements(calcDeplacementPossible(tablejeu, j1));
+        //afficherDeplacements(calculcalcDeplacementPossible(tablejeu, j1));
     }
 }

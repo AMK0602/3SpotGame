@@ -1,6 +1,6 @@
 package structure;
 
-public class CombinaisonPossible {
+public class Combinaison {
     /** Ligne de la première case */
     private int x1;
     /** Colonne de la première case */
@@ -11,7 +11,7 @@ public class CombinaisonPossible {
     private int y2;
 
     /** Constructeur de la Class */
-    public CombinaisonPossible(int x1, int y1, int x2, int y2){
+    public Combinaison(int x1, int y1, int x2, int y2){
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
@@ -46,5 +46,17 @@ public class CombinaisonPossible {
      */
     public int getY2() {
         return y2;
+    }
+
+    /**
+     * Vérifier que 2 cases sont bien adjacente pour vérifier le mouvement
+     * @param x1 : ligne de la première case
+     * @param y1 : colonne de la première case
+     * @param x2 : ligne de la deuxième case
+     * @param y2 : colonne de la deuxième case
+     * @return true si les cases sont adjacente, false si elles ne le sont pas
+     */
+    public static boolean estAdjacent(int x1, int y1, int x2, int y2){
+        return (x2 == x1 + 1 && y2 == y1) || (x2 == x1 && y2 == y1 + 1);
     }
 }
