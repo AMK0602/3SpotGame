@@ -77,7 +77,10 @@ public class Joueur {
         System.out.print("Quel déplacement souhaitez-vous faire ? ");
         String resultat = sc.next();
         int numero = Integer.parseInt(resultat)-1;
-        if(numero <= listCombinaison.size() && numero >= 0){
+        System.out.println(listCombinaison.size());
+        if(numero >= listCombinaison.size() || numero <0){
+            this.deplacerPiece(table, listCombinaison);
+        }else {
             for(int i =0;i<table.length;i++){
                 for(int j=0;j<table.length;j++){
                     if(table[i][j] == this.getColor()){
@@ -87,8 +90,7 @@ public class Joueur {
             }
             table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = this.getColor();
             table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = this.getColor();
-        }else {
-            this.deplacerPiece(table, listCombinaison);
+
         }
     }
 }
