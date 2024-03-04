@@ -67,15 +67,22 @@ public class Calcul {
     public void calculerPointGagne(EtatCase[][] tablejeu, Pion[] listePion, Joueur joueur) {
         for (int i=0; i< tablejeu.length;++i){
             for (int j=0; j< tablejeu.length;++j){
-                if(tablejeu[i][j]== joueur.getColor()){
-                    for(int k=0; k<listePion.length;++k){
-                        if(listePion[k].getX() == i && listePion[k].getY() ==j){
-                            joueur.incrementScore();
-                        }
+                if(contientPion(listePion,i,j)){
+                    if(tablejeu[i][j]== joueur.getColor()){
+                        joueur.incrementScore();
                     }
                 }
             }
         }
+    }
+
+    public boolean contientPion(Pion[] listePion, int x, int y){
+        for (Pion pion : listePion) {
+            if (pion.getX() == x && pion.getY() == y) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

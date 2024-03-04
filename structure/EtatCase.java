@@ -1,17 +1,19 @@
 package structure;
 
 public enum EtatCase {
-    ROUGE('R'),
-    BLEU('B'),
-    NEUTRE('N'),
-    LIBRE(' ');
+    ROUGE('R', "ROUGE"),
+    BLEU('B', "BLEU"),
+    NEUTRE('N', "NEUTRE"),
+    LIBRE(' ', " ");
 
     /** Raccourcis/Alias utilisé par une couleur pour l'affichage de la table */
     private char alias;
+    private String nomPiece;
 
     /** Constructeur de l'Enumération */
-    EtatCase(char alias){
+    EtatCase(char alias, String nomPiece){
         this.alias = alias;
+        this.nomPiece = nomPiece;
     }
 
     /**
@@ -19,4 +21,8 @@ public enum EtatCase {
      * @return alias : l'alias de la couleur
      */
     public char getAlias(){ return alias;}
+
+    public String getNomPiece() {
+        return nomPiece;
+    }
 }
