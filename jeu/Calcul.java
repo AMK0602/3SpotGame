@@ -83,7 +83,7 @@ public class Calcul {
      * @param y : la colonne de la case du pion
      * @return true si le pion est bien attribué à cette case
      */
-    public boolean contientPion(Pion[] listePion, int x, int y){
+    public static boolean contientPion(Pion[] listePion, int x, int y){
         for (Pion pion : listePion) {
             if (pion.getX() == x && pion.getY() == y) {
                 return true;

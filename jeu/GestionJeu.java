@@ -7,7 +7,6 @@ import structure.Pion;
 
 import java.util.LinkedList;
 
-import static jeu.Affichage.afficherTable;
 import static jeu.Initialiser.*;
 
 public class GestionJeu {
@@ -36,14 +35,14 @@ public class GestionJeu {
             for(int i=0; i<listeJoueur.length-1;++i){
                 listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[i]);
                 System.out.println("JOUEUR "+ listeJoueur[i].getColor().getNomPiece()+ " PIECE " + listeJoueur[i].getColor().getAlias());
-                afficherTable(tablejeu, listeCombinaison);
+                affichage.afficherTable(tablejeu, listeCombinaison, listePion);
                 affichage.afficherDeplacements(listeCombinaison);
                 listeJoueur[i].deplacerPiece(tablejeu, listeCombinaison);
                 calcul.calculerPointGagne(tablejeu, listePion, listeJoueur[i]);
 
                 System.out.println("JOUEUR "+ listeJoueur[i].getColor().getNomPiece()+ " PIECE " + listeJoueur[2].getColor().getAlias());
                 listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[2]);
-                afficherTable(tablejeu,listeCombinaison);
+                affichage.afficherTable(tablejeu,listeCombinaison,listePion);
                 affichage.afficherDeplacements(listeCombinaison);
                 listeJoueur[2].deplacerPiece(tablejeu, listeCombinaison);
 

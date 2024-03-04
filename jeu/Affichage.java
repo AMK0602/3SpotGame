@@ -2,6 +2,8 @@ package jeu;
 
 import structure.Combinaison;
 import structure.EtatCase;
+import structure.Pion;
+
 import java.util.LinkedList;
 
 public class Affichage {
@@ -49,7 +51,11 @@ public class Affichage {
             } else if (nbMouvement==1) {
                 System.out.print("*     "+getMooveIndex(listeMouvement,1,i)+"     ");
             } else {
-                System.out.print("*     "+tablejeu[1][i].getAlias()+"     ");
+                if (Calcul.contientPion(listePion, 1, i ) && (tablejeu[1][i] != EtatCase.BLEU && tablejeu[1][i] != EtatCase.ROUGE &&tablejeu[1][i] != EtatCase.NEUTRE)) {
+                    System.out.print("*     O     ");
+                } else {
+                    System.out.print("*     " + tablejeu[1][i].getAlias() + "     ");
+                }
             }
         }
         System.out.print("*");
@@ -69,7 +75,11 @@ public class Affichage {
             } else if (nbMouvement==1) {
                 System.out.print("*     "+getMooveIndex(listeMouvement,2,i)+"     ");
             } else {
-                System.out.print("*     "+tablejeu[2][i].getAlias()+"     ");
+                if (Calcul.contientPion(listePion, 2, i) && (tablejeu[2][i] != EtatCase.BLEU && tablejeu[2][i] != EtatCase.ROUGE &&tablejeu[2][i] != EtatCase.NEUTRE)) {
+                    System.out.print("*     O     ");
+                } else {
+                    System.out.print("*     " + tablejeu[2][i].getAlias() + "     ");
+                }
             }
         }
         System.out.print("*");
