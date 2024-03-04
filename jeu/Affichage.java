@@ -11,7 +11,7 @@ public class Affichage {
      * @param tablejeu : la table de jeu
      * @param listeMouvement : la liste contenant la liste des mouvements
      */
-    public static void afficherTable(EtatCase[][] tablejeu, LinkedList<Combinaison> listeMouvement){
+    public void afficherTable(EtatCase[][] tablejeu, LinkedList<Combinaison> listeMouvement, Pion[] listePion){
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
         System.out.println("*           *           *           * ");
         for(int i=0; i< tablejeu.length;++i){ // 0 ->2 : 0 1 2
@@ -26,7 +26,11 @@ public class Affichage {
             } else if (nbMouvement==1) {
                 System.out.print("*     "+getMooveIndex(listeMouvement,0,i)+"     ");
             } else {
-                System.out.print("*     "+tablejeu[0][i].getAlias()+"     ");
+                if (Calcul.contientPion(listePion, 0, i) && (tablejeu[0][i] != EtatCase.BLEU && tablejeu[0][i] != EtatCase.ROUGE &&tablejeu[0][i] != EtatCase.NEUTRE)) {
+                    System.out.print("*     O     ");
+                } else {
+                    System.out.print("*     " + tablejeu[0][i].getAlias() + "     ");
+                }
             }
         }
         System.out.println("*");
