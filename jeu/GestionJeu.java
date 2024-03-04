@@ -39,14 +39,14 @@ public class GestionJeu {
                 System.out.println("JOUEUR "+ listeJoueur[i].getColor().getAlias());
                 afficherTable(tablejeu, listeCombinaison);
                 affichage.afficherDeplacements(listeCombinaison);
-                deplacerPiece(tablejeu, listeJoueur[i], listeCombinaison);
+                listeJoueur[i].deplacerPiece(tablejeu, listeCombinaison);
                 calcul.calculerPointGagne(tablejeu, listePion, listeJoueur[i]);
 
                 System.out.println("JOUEUR "+ listeJoueur[2].getColor().getAlias());
                 listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[2]);
                 afficherTable(tablejeu,listeCombinaison);
                 affichage.afficherDeplacements(listeCombinaison);
-                deplacerPiece(tablejeu, listeJoueur[2], listeCombinaison);
+                listeJoueur[2].deplacerPiece(tablejeu, listeCombinaison);
 
             }
             System.out.println(" ");

@@ -1,5 +1,8 @@
 package structure;
 
+import java.util.LinkedList;
+import java.util.Scanner;
+
 public class Joueur {
     /** Identifiant du joueur */
     private int identifiant;
@@ -60,5 +63,32 @@ public class Joueur {
         if(score >= 12 && j2.getScore() >=6){
             return true;
         } else return score < 6 && j2.getScore() >= 12;
+    }
+
+    /**
+     * l'utilisateur choisi un numéro et le déplacement est effectué en fonction de ce déplacement
+     * @param table : table de jeu
+     * @param listCombinaison : la liste des combinaisons possible pour le mouvement
+     */
+    public void deplacerPiece(EtatCase[][] table, LinkedList<Combinaison> listCombinaison) {
+        // afficher table des mouvements possibles
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Quel déplacement souhaitez-vous faire ? ");
+        String resultat = sc.next();
+        int numero = Integer.parseInt(resultat)-1;
+        if(numero <= listCombinaison.size() && numero >= 0){
+            for(int i =0;i<table.length;i++){
+                for(int j=0;j<table.length;j++){
+                    if(table[i][j] == this.getColor()){
+                        table[i][j] = EtatCase.LIBRE;
+                    }
+                }
+            }
+            table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = this.getColor();
+            table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = this.getColor();
+        }else {
+            this.deplacerPiece(table, listCombinaison);
+        }
     }
 }
