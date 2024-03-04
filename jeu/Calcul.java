@@ -76,6 +76,13 @@ public class Calcul {
         }
     }
 
+    /**
+     * Vérifier si une case contient un pion ou non
+     * @param listePion : la liste contenant les pions avec leurs positions
+     * @param x : la ligne de la case du pion
+     * @param y : la colonne de la case du pion
+     * @return true si le pion est bien attribué à cette case
+     */
     public boolean contientPion(Pion[] listePion, int x, int y){
         for (Pion pion : listePion) {
             if (pion.getX() == x && pion.getY() == y) {

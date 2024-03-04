@@ -3,11 +3,12 @@ package structure;
 public enum EtatCase {
     ROUGE('R', "ROUGE"),
     BLEU('B', "BLEU"),
-    NEUTRE('N', "NEUTRE"),
+    NEUTRE('W', "NEUTRE"),
     LIBRE(' ', " ");
 
     /** Raccourcis/Alias utilisé par une couleur pour l'affichage de la table */
     private char alias;
+    /** Nom de la couleur utilisé pour définir le nom du joueur */
     private String nomPiece;
 
     /** Constructeur de l'Enumération */
@@ -22,6 +23,10 @@ public enum EtatCase {
      */
     public char getAlias(){ return alias;}
 
+    /**
+     * Permet d'obtenir le nom de la couleur pour une couleur donnée
+     * @return nomPiece : le nom de la couleur, de la pièce
+     */
     public String getNomPiece() {
         return nomPiece;
     }

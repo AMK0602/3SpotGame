@@ -9,7 +9,6 @@ import java.util.LinkedList;
 
 import static jeu.Affichage.afficherTable;
 import static jeu.Initialiser.*;
-import static jeu.MouvementsPiece.*;
 
 public class GestionJeu {
     /** La listes des mouvements possibles avec les positions des cases */
