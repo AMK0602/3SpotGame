@@ -6,7 +6,7 @@ import structure.Pion;
 
 public class Initialiser {
 
-    /**
+/**
      * Initialiser 2 joueurs pour jouer au jeu
      * Permet également de choisir leurs couleurs
      * @return listejoueur : la liste des joueurs qu'on a rempli.

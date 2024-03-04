@@ -35,13 +35,13 @@ public class GestionJeu {
         while(!jeuTermine()){
             for(int i=0; i<listeJoueur.length-1;++i){
                 listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[i]);
-                System.out.println("JOUEUR "+ listeJoueur[i].getColor().getNomPiece()+ " PIECE" + listeJoueur[i].getColor().getAlias());
+                System.out.println("JOUEUR "+ listeJoueur[i].getColor().getNomPiece()+ " PIECE " + listeJoueur[i].getColor().getAlias());
                 afficherTable(tablejeu, listeCombinaison);
                 affichage.afficherDeplacements(listeCombinaison);
                 listeJoueur[i].deplacerPiece(tablejeu, listeCombinaison);
                 calcul.calculerPointGagne(tablejeu, listePion, listeJoueur[i]);
 
-                System.out.println("JOUEUR "+ listeJoueur[i].getColor().getNomPiece()+ " PIECE" + listeJoueur[i].getColor().getAlias());
+                System.out.println("JOUEUR "+ listeJoueur[i].getColor().getNomPiece()+ " PIECE " + listeJoueur[2].getColor().getAlias());
                 listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[2]);
                 afficherTable(tablejeu,listeCombinaison);
                 affichage.afficherDeplacements(listeCombinaison);
