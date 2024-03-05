@@ -72,25 +72,28 @@ public class Joueur {
      */
     public void deplacerPiece(EtatCase[][] table, LinkedList<Combinaison> listCombinaison) {
         // afficher table des mouvements possibles
+        //TODO fonction saisir
         Scanner sc = new Scanner(System.in);
-
         System.out.print("Quel déplacement souhaitez-vous faire ? ");
         String resultat = sc.next();
-        int numero = Integer.parseInt(resultat)-1;
-        System.out.println(listCombinaison.size());
-        if(numero >= listCombinaison.size() || numero <0){
-            this.deplacerPiece(table, listCombinaison);
-        }else {
-            for(int i =0;i<table.length;i++){
-                for(int j=0;j<table.length;j++){
-                    if(table[i][j] == this.getColor()){
-                        table[i][j] = EtatCase.LIBRE;
+
+        try{
+            int numero = Integer.parseInt(resultat)-1;
+            if(numero >= listCombinaison.size() || numero <0){
+                this.deplacerPiece(table, listCombinaison);
+            }else {
+                for (int i = 0; i < table.length; i++) {
+                    for (int j = 0; j < table.length; j++) {
+                        if (table[i][j] == this.getColor()) {
+                            table[i][j] = EtatCase.LIBRE;
+                        }
                     }
                 }
+                table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = this.getColor();
+                table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = this.getColor();
             }
-            table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = this.getColor();
-            table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = this.getColor();
-
+        } catch (NumberFormatException exception){
+            deplacerPiece(table, listCombinaison);
         }
     }
 }

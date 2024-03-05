@@ -12,6 +12,7 @@ public class Affichage {
      * Permet d'afficher la table avec l'Etat de la table et les mouvement possible pour chaque joueur
      * @param tablejeu : la table de jeu
      * @param listeMouvement : la liste contenant la liste des mouvements
+     * @param listePion : la liste contenant les pions avec leurs coordoonées
      */
     public void afficherTable(EtatCase[][] tablejeu, LinkedList<Combinaison> listeMouvement, Pion[] listePion){
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
@@ -51,6 +52,7 @@ public class Affichage {
             } else if (nbMouvement==1) {
                 System.out.print("*     "+getMooveIndex(listeMouvement,1,i)+"     ");
             } else {
+                //TODO SIMPLIFIER ICI
                 if (Calcul.contientPion(listePion, 1, i ) && (tablejeu[1][i] != EtatCase.BLEU && tablejeu[1][i] != EtatCase.ROUGE &&tablejeu[1][i] != EtatCase.NEUTRE)) {
                     System.out.print("*     O     ");
                 } else {
@@ -75,6 +77,7 @@ public class Affichage {
             } else if (nbMouvement==1) {
                 System.out.print("*     "+getMooveIndex(listeMouvement,2,i)+"     ");
             } else {
+                //TODO SIMPLIFIER ICI
                 if (Calcul.contientPion(listePion, 2, i) && (tablejeu[2][i] != EtatCase.BLEU && tablejeu[2][i] != EtatCase.ROUGE &&tablejeu[2][i] != EtatCase.NEUTRE)) {
                     System.out.print("*     O     ");
                 } else {

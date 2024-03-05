@@ -62,13 +62,12 @@ class InitialiserTest {
 
     @Test
     void testInitPion() {
-        Pion pion1 = new Pion(0,2);
-        Pion pion2 = new Pion(1,2);
-        Pion pion3 = new Pion(2,2);
         Pion[] listepion = new Pion[3];
-        listepion[0] = pion1;
-        listepion[1] = pion2;
-        listepion[2] = pion3;
+        Pion pion1 = new Pion(0,2, listepion);
+        Pion pion2 = new Pion(1,2, listepion);
+        Pion pion3 = new Pion(2,2, listepion);
+
+
         assertNotEquals(pion1.getX(),pion3.getX());
         assertEquals(pion1.getY(),pion2.getY(),pion3.getY());
         assertEquals(pion2.getX(),1);

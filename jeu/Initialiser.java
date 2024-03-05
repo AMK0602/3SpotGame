@@ -6,12 +6,15 @@ import structure.Pion;
 
 public class Initialiser {
 
-/**
+    //TODO FAIRE CONSTANTES
+
+    /**
      * Initialiser 2 joueurs pour jouer au jeu
      * Permet également de choisir leurs couleurs
      * @return listejoueur : la liste des joueurs qu'on a rempli.
      */
     public static Joueur[] initJoueurs(){
+        //TODO OPTIMISER ICI
         Joueur j1 = new Joueur();
         Joueur j2 = new Joueur();
         Joueur j3 = new Joueur();
@@ -19,6 +22,7 @@ public class Initialiser {
         j2.setColor(saisirCouleur());
         j3.setColor(EtatCase.NEUTRE);
         while(j2.hasSameColor(j1)){
+            //TODO afficher msg erreur
             j2.setColor(saisirCouleur());
         }
         Joueur[] listeJoueur = new Joueur[3];
@@ -75,13 +79,10 @@ public class Initialiser {
      * @return listepion : la liste des pions qu'on a remplie
      */
     public static Pion[] initPion(){
-        Pion pion1 = new Pion(0,2);
-        Pion pion2 = new Pion(1,2);
-        Pion pion3 = new Pion(2,2);
         Pion[] listepion = new Pion[3];
-        listepion[0] = pion1;
-        listepion[1] = pion2;
-        listepion[2] = pion3;
+        new Pion(0,2, listepion);
+        new Pion(1,2,listepion);
+        new Pion(2,2, listepion);
         return listepion;
     }
 
