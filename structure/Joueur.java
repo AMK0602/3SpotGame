@@ -14,9 +14,11 @@ public class Joueur {
     private static int nbJoueur = 0;
 
     /** Constructeur de la Class */
-    public Joueur() {
-        this.identifiant = ++nbJoueur;
+    public Joueur(EtatCase couleur, Joueur[] listejoueur) {
         this.score = 0;
+        this.couleur = couleur;
+        listejoueur[nbJoueur] = this;
+        ++nbJoueur;
     }
 
     /**
@@ -74,7 +76,7 @@ public class Joueur {
         // afficher table des mouvements possibles
         //TODO fonction saisir
         Scanner sc = new Scanner(System.in);
-        System.out.print("Quel déplacement souhaitez-vous faire ? ");
+        MessageType.SAISIR_DEPLACEMENT.afficherMessage();
         String resultat = sc.next();
 
         try{

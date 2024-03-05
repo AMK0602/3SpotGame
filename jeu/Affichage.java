@@ -2,6 +2,7 @@ package jeu;
 
 import structure.Combinaison;
 import structure.EtatCase;
+import structure.MessageType;
 import structure.Pion;
 
 import java.util.LinkedList;
@@ -96,10 +97,10 @@ public class Affichage {
      * @param tableau : la liste des mouvements possibles avec les positions des cases
      */
     public void afficherDeplacements(LinkedList<Combinaison> tableau) {
-        //System.out.println("Couples de déplacements possibles : ");
+        MessageType.LISTE_COMBI.afficherMessage();
         for (int i = 0; i < tableau.size(); ++i) {
             int id_mouv = i+1;
-            System.out.println("Le mouvement "+id_mouv+" est : ([" + tableau.get(i).getX1() + "][" + tableau.get(i).getY1() + "], [" + tableau.get(i).getX2() + "][" + tableau.get(i).getY2() + "])");
+            System.out.println("["+id_mouv+"] - [(" + tableau.get(i).getX1() + "," + tableau.get(i).getY1() + "), (" + tableau.get(i).getX2() + "," + tableau.get(i).getY2() + ")]");
         }
     }
 
