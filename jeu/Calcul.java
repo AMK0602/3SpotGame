@@ -10,6 +10,11 @@ import java.util.LinkedList;
 import static structure.Combinaison.estAdjacent;
 
 public class Calcul {
+    private static Jeu jeu; // Référence à la classe Jeu
+
+    public Calcul(Jeu jeu) {
+        this.jeu = jeu;
+    }
 
     /**
      * Fonction qui permet de vérifier qu'un mouvement est possible entre 2 cases
@@ -90,4 +95,8 @@ public class Calcul {
         return false;
     }
 
+
+    public static boolean isDeplacementPossible(int noDeplacement, LinkedList<Combinaison> listCombinaison){
+            return !(noDeplacement >= listCombinaison.size() || noDeplacement <0);
+    }
 }

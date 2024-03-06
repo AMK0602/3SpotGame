@@ -5,27 +5,32 @@ import structure.*;
 import java.util.LinkedList;
 
 public class Affichage {
+    private static Jeu jeu; // Référence à la classe Jeu
 
+    public Affichage(Jeu jeu) {
+        this.jeu = jeu;
+    }
+
+    //TODO debugguer et MAJ fonction
     /**
      * Permet d'afficher la table avec l'Etat de la table et les mouvement possible pour chaque joueur
-     * @param tablejeu : la table de jeu
-     * @param listeMouvement : la liste contenant la liste des mouvements
-     * @param listePion : la liste contenant les pions avec leurs coordoonées
      */
-    public void afficherTable(EtatCase[][] tablejeu, LinkedList<Combinaison> listeMouvement, Pion[] listePion){
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
-        System.out.println("*           *           *           * ");
+    public void afficherTable(LinkedList<Combinaison> listeMouvement){
+        EtatCase[][] tablejeu = jeu.getTableJeu();
+        Pion[] listePion = jeu.getListePion();
+
+        afficherEntete();
         for(int i=0; i< tablejeu.length;++i){ // 0 ->2 : 0 1 2
             int nbMouvement = compteNbCombiParCase(listeMouvement,0,i);
             if(nbMouvement>1){
                 System.out.print("*    ");
-                    System.out.print(getMooveIndex(listeMouvement,0,i));
+                    System.out.print(getIndexDeplacement(listeMouvement,0,i));
                     System.out.print("-");
-                    int index2 = getMooveIndex(listeMouvement,0,i)+1;
+                    int index2 = getIndexDeplacement(listeMouvement,0,i)+1;
                     System.out.print(index2);
                 System.out.print("    ");
             } else if (nbMouvement==1) {
-                System.out.print("*     "+getMooveIndex(listeMouvement,0,i)+"     ");
+                System.out.print("*     "+ getIndexDeplacement(listeMouvement,0,i)+"     ");
             } else {
                 if (Calcul.contientPion(listePion, 0, i) && (tablejeu[0][i] != EtatCase.BLEU && tablejeu[0][i] != EtatCase.ROUGE &&tablejeu[0][i] != EtatCase.NEUTRE)) {
                     System.out.print("*     O     ");
@@ -35,20 +40,18 @@ public class Affichage {
             }
         }
         System.out.println("*");
-        System.out.println("*           *           *           * ");
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
-        System.out.println("*           *           *           * ");
+        afficherSeparateur();
         for(int i=0; i< tablejeu.length;++i){ // 0 ->2 : 0 1 2
             int nbMouvement = compteNbCombiParCase(listeMouvement,1,i);
             if(nbMouvement>1){
                 System.out.print("*    ");
-                    System.out.print(getMooveIndex(listeMouvement,1,i));
+                    System.out.print(getIndexDeplacement(listeMouvement,1,i));
                     System.out.print("-");
-                    int index2 = getMooveIndex(listeMouvement,1,i)+1;
+                    int index2 = getIndexDeplacement(listeMouvement,1,i)+1;
                     System.out.print(index2);
                 System.out.print("    ");
             } else if (nbMouvement==1) {
-                System.out.print("*     "+getMooveIndex(listeMouvement,1,i)+"     ");
+                System.out.print("*     "+ getIndexDeplacement(listeMouvement,1,i)+"     ");
             } else {
                 //TODO SIMPLIFIER ICI
                 if (Calcul.contientPion(listePion, 1, i ) && (tablejeu[1][i] != EtatCase.BLEU && tablejeu[1][i] != EtatCase.ROUGE &&tablejeu[1][i] != EtatCase.NEUTRE)) {
@@ -58,22 +61,20 @@ public class Affichage {
                 }
             }
         }
-        System.out.print("*");
-        System.out.println(" ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
-        System.out.println("*           *           *           * ");
+        System.out.println("*");
+        afficherSeparateur();
+
         for(int i=0; i< tablejeu.length;++i){ // 0 ->2 : 0 1 2
             int nbMouvement = compteNbCombiParCase(listeMouvement,2,i);
             if(nbMouvement>1){
                 System.out.print("*    ");
-                    System.out.print(getMooveIndex(listeMouvement,2,i));
+                    System.out.print(getIndexDeplacement(listeMouvement,2,i));
                     System.out.print("-");
-                    int index2 = getMooveIndex(listeMouvement,2,i)+1;
+                    int index2 = getIndexDeplacement(listeMouvement,2,i)+1;
                     System.out.print(index2);
                 System.out.print("    ");
             } else if (nbMouvement==1) {
-                System.out.print("*     "+getMooveIndex(listeMouvement,2,i)+"     ");
+                System.out.print("*     "+ getIndexDeplacement(listeMouvement,2,i)+"     ");
             } else {
                 //TODO SIMPLIFIER ICI
                 if (Calcul.contientPion(listePion, 2, i) && (tablejeu[2][i] != EtatCase.BLEU && tablejeu[2][i] != EtatCase.ROUGE &&tablejeu[2][i] != EtatCase.NEUTRE)) {
@@ -83,10 +84,8 @@ public class Affichage {
                 }
             }
         }
-        System.out.print("*");
-        System.out.println(" ");
-        System.out.println("*           *           *           * ");
-        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
+        System.out.println("*");
+        afficherFooter();
     }
 
     /**
@@ -125,13 +124,17 @@ public class Affichage {
      * @param y : la colonne du mouvement
      * @return i+1 quand on trouve le mouvement ou x si le mouvement n'est pas trouvé (cela n'arrive jamais)
      */
-    public static int getMooveIndex(LinkedList<Combinaison> listeCombinaison, int x, int y){
+    public static int getIndexDeplacement(LinkedList<Combinaison> listeCombinaison, int x, int y){
         for (int i=0; i<listeCombinaison.size();++i){
             if(listeCombinaison.get(i).getX1() == x && listeCombinaison.get(i).getY1() == y){
                 return i+1;
             }
         }
         return x;
+    }
+
+    public void afficherGagnant(){
+        System.out.println(MessageType.VICTOIRE_JOUEUR.getMessage()+ jeu.getGagnant(jeu.getListeJoueur()[0],jeu.getListeJoueur()[1] ).getIdentifiant());
     }
 
     public void afficherScores(Joueur joueur1, Joueur joueur2){
@@ -142,5 +145,18 @@ public class Affichage {
         MessageType.SEPARATEUR.afficherMessage();
         System.out.println(" ");
 
+    }
+    public static void afficherEntete(){
+        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
+        System.out.println("*           *           *           * ");
+    }
+    public static void afficherSeparateur(){
+        System.out.println("*           *           *           * ");
+        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
+        System.out.println("*           *           *           * ");
+    }
+    public static void afficherFooter(){
+        System.out.println("*           *           *           * ");
+        System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
     }
 }

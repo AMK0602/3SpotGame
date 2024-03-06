@@ -1,5 +1,7 @@
 package structure;
 
+import jeu.Jeu;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -14,12 +16,11 @@ public class Joueur {
     private static int nbJoueur = 0;
 
     /** Constructeur de la Class */
-    public Joueur(EtatCase couleur, Joueur[] listejoueur) {
+    public Joueur(EtatCase couleur) {
         this.score = 0;
         this.couleur = couleur;
+        this.identifiant = nbJoueur;
         ++nbJoueur;
-        this.identifiant = nbJoueur-1;
-        listejoueur[nbJoueur-1] = this;
     }
 
     /**
@@ -59,46 +60,17 @@ public class Joueur {
         return this.couleur == j.couleur;
     }
 
-    /**
-     * Fonction qui permet de vérifier si un joueur à gagner contre un autre joueur.
-     * @param j2 : Le joueur avec qui on souhaite comparer le score
-     * @return true si c'est le cas (score a 12 pour le premier joueur et score > 6 pour le second).
-     */
-    public boolean aGagneContre(Joueur j2){
-        if(score >= 12 && j2.getScore() >=6){
-            return true;
-        } else return score < 6 && j2.getScore() >= 12;
-    }
 
-    /**
-     * l'utilisateur choisi un numéro et le déplacement est effectué en fonction de ce déplacement
-     * @param table : table de jeu
-     * @param listCombinaison : la liste des combinaisons possible pour le mouvement
-     */
-    public void deplacerPiece(EtatCase[][] table, LinkedList<Combinaison> listCombinaison) {
-        // afficher table des mouvements possibles
-        //TODO fonction saisir
+    public int saisirDeplacement(){
         Scanner sc = new Scanner(System.in);
         MessageType.SAISIR_DEPLACEMENT.afficherMessage();
         String resultat = sc.next();
-
-        try{
-            int numero = Integer.parseInt(resultat)-1;
-            if(numero >= listCombinaison.size() || numero <0){
-                this.deplacerPiece(table, listCombinaison);
-            }else {
-                for (int i = 0; i < table.length; i++) {
-                    for (int j = 0; j < table.length; j++) {
-                        if (table[i][j] == this.getColor()) {
-                            table[i][j] = EtatCase.LIBRE;
-                        }
-                    }
-                }
-                table[listCombinaison.get(numero).getX1()][listCombinaison.get(numero).getY1()] = this.getColor();
-                table[listCombinaison.get(numero).getX2()][listCombinaison.get(numero).getY2()] = this.getColor();
-            }
+        try {
+            return Integer.parseInt(resultat)-1;
         } catch (NumberFormatException exception){
-            deplacerPiece(table, listCombinaison);
+            saisirDeplacement();
         }
+        return 0;
     }
+
 }

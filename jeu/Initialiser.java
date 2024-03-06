@@ -7,9 +7,6 @@ import structure.Joueur;
 import structure.Pion;
 
 public class Initialiser {
-    public static final int SIZE_MAX_TABLE = 3;
-    public static final int NB_MAX_PION = 3;
-    public static final int NB_MAX_JOUEUR = 2;
 
     //TODO FAIRE CONSTANTES
 
@@ -19,16 +16,21 @@ public class Initialiser {
      * @return listejoueur : la liste des joueurs qu'on a rempli.
      */
     public static Joueur[] initJoueurs(){
-        Joueur[] listeJoueur = new Joueur[NB_MAX_JOUEUR+1];
+        Joueur[] listeJoueur = new Joueur[Jeu.NB_MAX_JOUEUR+1];
         MessageType.CHOIX_COULEUR.afficherMessage();
-        Joueur j1 = new Joueur(saisirCouleur(), listeJoueur);
-        MessageType.CHOIX_COULEUR.afficherMessage();
-        Joueur j2 = new Joueur(saisirCouleur(), listeJoueur);
-        while(j2.hasSameColor(j1)){
+        listeJoueur[0] = new Joueur(saisirCouleur());
+        listeJoueur[2] = new Joueur(EtatCase.NEUTRE);
+        if(listeJoueur[0].getColor() == EtatCase.ROUGE){
+            listeJoueur[1] = new Joueur(EtatCase.BLEU);
+        } else {
+            listeJoueur[1] = new Joueur(EtatCase.ROUGE);
+        }
+        //TODO RESOUDRE ICI
+        /*while(j2.hasSameColor(j1)){
             MessageType.ERR_COULEUR_UTILISE.afficherMessage();
             j2.setColor(saisirCouleur());
-        }
-        new Joueur(EtatCase.NEUTRE, listeJoueur);
+        }*/
+
         return listeJoueur;
     }
 
@@ -40,17 +42,18 @@ public class Initialiser {
     public static EtatCase saisirCouleur(){
         Scanner sc = new Scanner(System.in) ;
         String couleur = sc.next();
-        if(!isColorExist(couleur)){
+        if(!doesColorExist(couleur)){
             MessageType.ERR_COULEUR_INEXISTANTE.afficherMessage();
             return saisirCouleur(); // appel récursif pour nous forcer a saisir une couleur correct
         } else {
-            if(couleur.equalsIgnoreCase("rouge") || couleur.equalsIgnoreCase("r")){
+            return getColor(couleur);
+            //TODO return getColor(couleur);
+            /*if(couleur.equalsIgnoreCase("rouge") || couleur.equalsIgnoreCase("r")){
                 return EtatCase.ROUGE;
             } else if (couleur.equalsIgnoreCase("bleu") || couleur.equalsIgnoreCase("b")){
                 return EtatCase.BLEU;
-            }
+            }*/
         }
-        return null;
     }
 
     /**
@@ -58,7 +61,7 @@ public class Initialiser {
      * @return table : la table de jeu qu'on a rempli
      */
     public static EtatCase[][] initTable(){
-        EtatCase[][] table = new EtatCase[SIZE_MAX_TABLE][SIZE_MAX_TABLE];
+        EtatCase[][] table = new EtatCase[Jeu.SIZE_MAX_TABLE][Jeu.SIZE_MAX_TABLE];
         table[0][0] = EtatCase.LIBRE;
         table[0][1] = EtatCase.ROUGE;
         table[0][2] = EtatCase.ROUGE;
@@ -78,10 +81,11 @@ public class Initialiser {
      * @return listepion : la liste des pions qu'on a remplie
      */
     public static Pion[] initPion(){
-        Pion[] listepion = new Pion[NB_MAX_PION];
-        new Pion(0,2, listepion);
-        new Pion(1,2,listepion);
-        new Pion(2,2, listepion);
+        Pion[] listepion = new Pion[Jeu.NB_MAX_PION];
+        listepion[0] = new Pion(0,2);
+        listepion[1] = new Pion(1,2);
+        listepion[2] = new Pion(2,2);
+
         return listepion;
     }
 
@@ -90,11 +94,15 @@ public class Initialiser {
      * @param couleur : la couleur saisie par le joueur
      * @return true si la couleur est valide, false si la couleur est invalide
      */
-    private static boolean isColorExist(String couleur) {
-        if(couleur.equalsIgnoreCase("rouge") || couleur.equalsIgnoreCase("bleu")){
-            return true;
+    private static boolean doesColorExist(String couleur) {
+        return couleur.equalsIgnoreCase("rouge") || couleur.equalsIgnoreCase("bleu") || couleur.equalsIgnoreCase("r") || couleur.equalsIgnoreCase("b");
+    }
+
+    public static EtatCase getColor(String couleur){
+        if(couleur.equalsIgnoreCase("rouge") ||couleur.equalsIgnoreCase("r")){
+            return EtatCase.ROUGE;
         } else {
-            return false;
+            return EtatCase.BLEU;
         }
     }
 }

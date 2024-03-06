@@ -5,15 +5,11 @@ public class Pion {
     private int x;
     /** colonne de la case */
     private int y;
-    /** Compteur de pion dans la liste de pion */
-    private static int nbPion = 0;
 
     /** Constructeur de la Class */
-    public Pion(int x, int y, Pion[] listePion){
+    public Pion(int x, int y){
         this.x = x;
         this.y = y;
-        listePion[nbPion] = this;
-        ++nbPion;
     }
 
     /**
