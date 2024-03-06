@@ -67,10 +67,8 @@ public class Calcul {
     public void calculerPointGagne(EtatCase[][] tablejeu, Pion[] listePion, Joueur joueur) {
         for (int i=0; i< tablejeu.length;++i){
             for (int j=0; j< tablejeu.length;++j){
-                if(contientPion(listePion,i,j)){
-                    if(tablejeu[i][j]== joueur.getColor()){
-                        joueur.incrementScore();
-                    }
+                if(contientPion(listePion,i,j) && (tablejeu[i][j]== joueur.getColor())){
+                    joueur.incrementScore();
                 }
             }
         }
