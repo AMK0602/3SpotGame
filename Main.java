@@ -1,13 +1,13 @@
-import jeu.GestionJeu;
+import jeu.Jeu;
 
-public class Jeu {
+public class Main {
 
     /**
      * Fonction main, permet de créer le jeu
      * @param args : les arguments si il y en a
      */
     public static void main (String[] args){
-        GestionJeu jeu = new GestionJeu();
+        Jeu jeu = new Jeu();
         System.out.println("Hello world !");
         jeu.jouerJeu();
     }

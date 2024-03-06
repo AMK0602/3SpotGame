@@ -1,9 +1,6 @@
 package jeu;
 
-import structure.Combinaison;
-import structure.EtatCase;
-import structure.MessageType;
-import structure.Pion;
+import structure.*;
 
 import java.util.LinkedList;
 
@@ -135,5 +132,15 @@ public class Affichage {
             }
         }
         return x;
+    }
+
+    public void afficherScores(Joueur joueur1, Joueur joueur2){
+        System.out.println(" ");
+        MessageType.SEPARATEUR.afficherMessage();
+        System.out.println(MessageType.SCORE_JOUEUR.getMessage() + joueur1.getColor().getAlias() +" : "+ joueur1.getScore());
+        System.out.println(MessageType.SCORE_JOUEUR.getMessage() + joueur2.getColor().getAlias() +" : "+ joueur2.getScore());
+        MessageType.SEPARATEUR.afficherMessage();
+        System.out.println(" ");
+
     }
 }

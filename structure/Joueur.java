@@ -17,8 +17,9 @@ public class Joueur {
     public Joueur(EtatCase couleur, Joueur[] listejoueur) {
         this.score = 0;
         this.couleur = couleur;
-        listejoueur[nbJoueur] = this;
         ++nbJoueur;
+        this.identifiant = nbJoueur-1;
+        listejoueur[nbJoueur-1] = this;
     }
 
     /**
@@ -32,6 +33,8 @@ public class Joueur {
      * @return score : La couleur du joueur indiqué
      */
     public EtatCase getColor(){return this.couleur;}
+
+    public int getIdentifiant(){return this.identifiant;}
 
     /**
      * Permet de définir la couleur de la pièce de quelqu'un

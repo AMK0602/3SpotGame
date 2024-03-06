@@ -1,15 +1,12 @@
 package jeu;
 
-import structure.Combinaison;
-import structure.EtatCase;
-import structure.Joueur;
-import structure.Pion;
+import structure.*;
 
 import java.util.LinkedList;
 
 import static jeu.Initialiser.*;
 
-public class GestionJeu {
+public class Jeu {
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu, d'une partie
      */
@@ -28,12 +25,15 @@ public class GestionJeu {
             for(int i=0; i<listeJoueur.length-1;++i){
                 /** La listes des mouvements possibles avec les positions des cases */
                 LinkedList<Combinaison> listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[i]);
+
+                //TODO FONCTION JOUERCOUP (joueur index, tablejeu, listecombi,listepion)
                 System.out.println("Joueur "+ listeJoueur[i].getColor().getNomPiece()+ " - Piece " + listeJoueur[i].getColor().getAlias());
                 affichage.afficherTable(tablejeu, listeCombinaison, listePion);
                 affichage.afficherDeplacements(listeCombinaison);
                 listeJoueur[i].deplacerPiece(tablejeu, listeCombinaison);
                 calcul.calculerPointGagne(tablejeu, listePion, listeJoueur[i]);
 
+                //TODO FONCTION JOUERCOUP
                 System.out.println("Joueur "+ listeJoueur[i].getColor().getNomPiece()+ " - Piece " + listeJoueur[2].getColor().getAlias());
                 listeCombinaison = calcul.calcDeplacementPossible(tablejeu, listeJoueur[2]);
                 affichage.afficherTable(tablejeu,listeCombinaison,listePion);
@@ -41,12 +41,9 @@ public class GestionJeu {
                 listeJoueur[2].deplacerPiece(tablejeu, listeCombinaison);
 
             }
-            System.out.println(" ");
-            System.out.println("-------------------------------------");
-            System.out.println("Score du joueur "+ listeJoueur[0].getColor().getAlias() +" : "+ listeJoueur[0].getScore());
-            System.out.println("Score du joueur "+ listeJoueur[1].getColor().getAlias() +" : "+ listeJoueur[1].getScore());
-            System.out.println("-------------------------------------");
-            System.out.println(" ");
+            //TODO FONCTION AFFICHER SCORE (joueur 1, joueur 2)
+            affichage.afficherScores(listeJoueur[0], listeJoueur[1]);
+
         }
         compareScore(listeJoueur[0], listeJoueur[1]);
     }
@@ -58,9 +55,9 @@ public class GestionJeu {
      */
     private static void compareScore(Joueur joueur1, Joueur joueur2) {
         if(joueur1.aGagneContre(joueur2)){ // J1 WIN
-            System.out.println("Victoire du joueur 1");
+            System.out.println(MessageType.VICTOIRE_JOUEUR.getMessage()+ joueur1.getIdentifiant());
         } else if (joueur2.aGagneContre(joueur1)){ // J2 WIN
-            System.out.println("Victoire du joueur 2");
+            System.out.println(MessageType.VICTOIRE_JOUEUR.getMessage()+ joueur2.getIdentifiant());
         }
     }
 
