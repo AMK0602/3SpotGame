@@ -19,8 +19,8 @@ public class Joueur {
     public Joueur(EtatCase couleur) {
         this.score = 0;
         this.couleur = couleur;
-        this.identifiant = nbJoueur;
         ++nbJoueur;
+        this.identifiant = nbJoueur;
     }
     public Joueur(){
         this.score = 0;
