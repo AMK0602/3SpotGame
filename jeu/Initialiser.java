@@ -8,8 +8,6 @@ import structure.Pion;
 
 public class Initialiser {
 
-    //TODO FAIRE CONSTANTES
-
     /**
      * Initialiser 2 joueurs pour jouer au jeu
      * Permet également de choisir leurs couleurs
@@ -19,18 +17,12 @@ public class Initialiser {
         Joueur[] listeJoueur = new Joueur[Jeu.NB_MAX_JOUEUR+1];
         MessageType.CHOIX_COULEUR.afficherMessage();
         listeJoueur[0] = new Joueur(saisirCouleur());
-        listeJoueur[2] = new Joueur(EtatCase.NEUTRE);
+        listeJoueur[2] = new Joueur();
         if(listeJoueur[0].getColor() == EtatCase.ROUGE){
             listeJoueur[1] = new Joueur(EtatCase.BLEU);
         } else {
             listeJoueur[1] = new Joueur(EtatCase.ROUGE);
         }
-        //TODO RESOUDRE ICI
-        /*while(j2.hasSameColor(j1)){
-            MessageType.ERR_COULEUR_UTILISE.afficherMessage();
-            j2.setColor(saisirCouleur());
-        }*/
-
         return listeJoueur;
     }
 
@@ -47,12 +39,6 @@ public class Initialiser {
             return saisirCouleur(); // appel récursif pour nous forcer a saisir une couleur correct
         } else {
             return getColor(couleur);
-            //TODO return getColor(couleur);
-            /*if(couleur.equalsIgnoreCase("rouge") || couleur.equalsIgnoreCase("r")){
-                return EtatCase.ROUGE;
-            } else if (couleur.equalsIgnoreCase("bleu") || couleur.equalsIgnoreCase("b")){
-                return EtatCase.BLEU;
-            }*/
         }
     }
 
@@ -98,6 +84,11 @@ public class Initialiser {
         return couleur.equalsIgnoreCase("rouge") || couleur.equalsIgnoreCase("bleu") || couleur.equalsIgnoreCase("r") || couleur.equalsIgnoreCase("b");
     }
 
+    /**
+     * Fonction pour récupérer la couleur en fonction d'un string donné
+     * @param couleur : la couleur saisi par le joueur sous forme d'un String
+     * @return EtatCase.COULEUR la valeur converti en une couleur valide
+     */
     public static EtatCase getColor(String couleur){
         if(couleur.equalsIgnoreCase("rouge") ||couleur.equalsIgnoreCase("r")){
             return EtatCase.ROUGE;

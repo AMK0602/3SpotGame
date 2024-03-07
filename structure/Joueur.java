@@ -22,6 +22,12 @@ public class Joueur {
         this.identifiant = nbJoueur;
         ++nbJoueur;
     }
+    public Joueur(){
+        this.score = 0;
+        this.couleur = EtatCase.NEUTRE;
+        this.identifiant = nbJoueur;
+        ++nbJoueur;
+    }
 
     /**
      * Permet de récupérer le score d'un joueur donnée
@@ -35,6 +41,10 @@ public class Joueur {
      */
     public EtatCase getColor(){return this.couleur;}
 
+    /**
+     * Permet de récupérer l'identifiant du joueur
+     * @return this.identifiant, correspondant au score du joueur
+     */
     public int getIdentifiant(){return this.identifiant;}
 
     /**
@@ -61,6 +71,10 @@ public class Joueur {
     }
 
 
+    /**
+     * Fonction qui permet de saisir le numéro d'un mouvement possible
+     * @return resultat si le nombre est un entier, saisirDeplacement() si il y a une erreur de format
+     */
     public int saisirDeplacement(){
         Scanner sc = new Scanner(System.in);
         MessageType.SAISIR_DEPLACEMENT.afficherMessage();

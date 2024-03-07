@@ -10,8 +10,10 @@ import java.util.LinkedList;
 import static structure.Combinaison.estAdjacent;
 
 public class Calcul {
-    private static Jeu jeu; // Référence à la classe Jeu
+    /** Référence à la classe Jeu */
+    private static Jeu jeu;
 
+    /** Constructeur de la classe */
     public Calcul(Jeu jeu) {
         this.jeu = jeu;
     }
@@ -96,6 +98,12 @@ public class Calcul {
     }
 
 
+    /**
+     * Permet de vérifier qu'un déplacement saisi par le joueur existe réellement
+     * @param noDeplacement : le numéro du déplacement saisi par le joueur
+     * @param listCombinaison : la liste des combinaisons où l'on souhaite vérifier la présence du mouvement
+     * @return true si le mouvement existe, false si il n'existe pas
+     */
     public static boolean isDeplacementPossible(int noDeplacement, LinkedList<Combinaison> listCombinaison){
             return !(noDeplacement >= listCombinaison.size() || noDeplacement <0);
     }

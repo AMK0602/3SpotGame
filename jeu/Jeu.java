@@ -24,6 +24,7 @@ public class Jeu {
     private Joueur[] listeJoueur;
     /** La liste des pions rapportant des points */
     private Pion[] listePion;
+
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu, d'une partie
      */
@@ -34,6 +35,7 @@ public class Jeu {
 
         Calcul calcul = new Calcul(this);
         Affichage affichage = new Affichage(this);
+
         while(!jeuTermine(listeJoueur)){
             for(int i=0; i<listeJoueur.length-1;++i){
                 System.out.println("Joueur "+ listeJoueur[i].getColor().getNomPiece()+ " - Piece " + listeJoueur[i].getColor().getAlias());
@@ -48,15 +50,21 @@ public class Jeu {
         affichage.afficherGagnant();
     }
 
+    /**
+     * Fonction permettant de jouer un coup
+     * @param joueur Le joueur à qui c'est le tour
+     * @param calcul fait référence à notre classe Calcul
+     * @param tableJeu notre table de jeu
+     * @param affichage fait référence à notre classe Affichage
+     */
     public static void jouerCoup(Joueur joueur, Calcul calcul, EtatCase[][] tableJeu, Affichage affichage){
         //TODO a simplifier
         /** La listes des mouvements possibles avec les positions des cases */
         LinkedList<Combinaison> listeCombinaison = calcul.calcDeplacementPossible(tableJeu, joueur);
-        System.out.println("access");
+
         affichage.afficherTable(listeCombinaison);
         affichage.afficherDeplacements(listeCombinaison);
-        int deplacement = joueur.saisirDeplacement();
-        deplacerPiece(tableJeu, calcul, listeCombinaison, deplacement,joueur);
+        deplacerPiece(tableJeu, calcul, listeCombinaison,joueur.saisirDeplacement(),joueur);
     }
 
     /**
@@ -67,6 +75,12 @@ public class Jeu {
         return listeJoueur[0].getScore() >= MAX_POINT || listeJoueur[1].getScore() >= 12;
     }
 
+    /**
+     * Permet de récupérer le joueur qui à gagner entre les deux joueurs
+     * @param joueur1 le premier joueur
+     * @param joueur2 le second joueur
+     * @return joueur1 ou joueur2 en fonction du vainqueur
+     */
     public Joueur getGagnant(Joueur joueur1, Joueur joueur2){
         if((joueur1.getScore() >= Jeu.MAX_POINT && joueur2.getScore() >=Jeu.MIN_ENNEMI_POINT) || (joueur2.getScore()>=MAX_POINT && joueur1.getScore()<MIN_ENNEMI_POINT)){
             return joueur1;
@@ -75,12 +89,17 @@ public class Jeu {
         }
         return null;
     }
+
     /**
-     * l'utilisateur choisi un numéro et le déplacement est effectué en fonction de ce déplacement
-     * @param listCombinaison : la liste des combinaisons possible pour le mouvement
+     * Fonction qui permet d'effectuer le déplacement pour un mouvement donné
+     * @param tableJeu notre table de jeu
+     * @param calcul fait référence à notre classe Calcul
+     * @param listeCombinaison la liste contenant les déplacement possibles du joueur
+     * @param noDeplacement le numéro du mouvement indiqué
+     * @param joueur le joueur à qui c'est le tour
      */
-    public static void deplacerPiece(EtatCase[][] tableJeu, Calcul calcul, LinkedList<Combinaison> listCombinaison, int noDeplacement, Joueur joueur) {
-        if(calcul.isDeplacementPossible(noDeplacement,listCombinaison)){
+    public static void deplacerPiece(EtatCase[][] tableJeu, Calcul calcul, LinkedList<Combinaison> listeCombinaison, int noDeplacement, Joueur joueur) {
+        if(calcul.isDeplacementPossible(noDeplacement,listeCombinaison)){
             for (int i = 0; i < tableJeu.length; i++) {
                 for (int j = 0; j < tableJeu.length; j++) {
                     if (tableJeu[i][j] == joueur.getColor()) {
@@ -88,20 +107,29 @@ public class Jeu {
                     }
                 }
             }
-            tableJeu[listCombinaison.get(noDeplacement).getX1()][listCombinaison.get(noDeplacement).getY1()] = joueur.getColor();
-            tableJeu[listCombinaison.get(noDeplacement).getX2()][listCombinaison.get(noDeplacement).getY2()] = joueur.getColor();
+            tableJeu[listeCombinaison.get(noDeplacement).getX1()][listeCombinaison.get(noDeplacement).getY1()] = joueur.getColor();
+            tableJeu[listeCombinaison.get(noDeplacement).getX2()][listeCombinaison.get(noDeplacement).getY2()] = joueur.getColor();
         } else {
-            deplacerPiece(tableJeu, calcul, listCombinaison, joueur.saisirDeplacement(),joueur);
+            deplacerPiece(tableJeu, calcul, listeCombinaison,joueur.saisirDeplacement(),joueur);
         }
     }
+
     /**
-     * Fonction qui permet de vérifier si un joueur à gagner contre un autre joueur.
-     * @return true si c'est le cas (score a 12 pour le premier joueur et score > 6 pour le second).
+     * Permet de récupérer notre table de jeu
+     * @return tablejeu : la table de jeu
      */
-
-
     public EtatCase[][] getTableJeu(){ return tableJeu; }
+
+    /**
+     * Permet de récupérer la liste des joueurs qui jouent
+     * @return listeJoueur : la liste des joueurs qui jouent
+     */
     public Joueur[] getListeJoueur(){ return listeJoueur; }
+
+    /**
+     * Permet de récupérer la liste qui contient les pions rapportant des points
+     * @return listePion : la liste des pions
+     */
     public Pion[] getListePion(){ return listePion; }
 
 }

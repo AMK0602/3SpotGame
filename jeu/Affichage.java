@@ -5,8 +5,10 @@ import structure.*;
 import java.util.LinkedList;
 
 public class Affichage {
+    /** Permet de récupérer en paramètre notre classe principale */
     private static Jeu jeu; // Référence à la classe Jeu
 
+    /** Constructeur de la classe */
     public Affichage(Jeu jeu) {
         this.jeu = jeu;
     }
@@ -53,7 +55,6 @@ public class Affichage {
             } else if (nbMouvement==1) {
                 System.out.print("*     "+ getIndexDeplacement(listeMouvement,1,i)+"     ");
             } else {
-                //TODO SIMPLIFIER ICI
                 if (Calcul.contientPion(listePion, 1, i ) && (tablejeu[1][i] != EtatCase.BLEU && tablejeu[1][i] != EtatCase.ROUGE &&tablejeu[1][i] != EtatCase.NEUTRE)) {
                     System.out.print("*     O     ");
                 } else {
@@ -76,7 +77,6 @@ public class Affichage {
             } else if (nbMouvement==1) {
                 System.out.print("*     "+ getIndexDeplacement(listeMouvement,2,i)+"     ");
             } else {
-                //TODO SIMPLIFIER ICI
                 if (Calcul.contientPion(listePion, 2, i) && (tablejeu[2][i] != EtatCase.BLEU && tablejeu[2][i] != EtatCase.ROUGE &&tablejeu[2][i] != EtatCase.NEUTRE)) {
                     System.out.print("*     O     ");
                 } else {
@@ -133,10 +133,18 @@ public class Affichage {
         return x;
     }
 
+    /**
+     * Permet d'afficher le message de victoire d'un joueur
+     */
     public void afficherGagnant(){
         System.out.println(MessageType.VICTOIRE_JOUEUR.getMessage()+ jeu.getGagnant(jeu.getListeJoueur()[0],jeu.getListeJoueur()[1] ).getIdentifiant());
     }
 
+    /**
+     * Fonction pour afficher les scores des deux joueurs
+     * @param joueur1 : le joueur 1 à qui on récupère le score
+     * @param joueur2 : le joueur 2 à qui on récupère le score
+     */
     public void afficherScores(Joueur joueur1, Joueur joueur2){
         System.out.println(" ");
         MessageType.SEPARATEUR.afficherMessage();
@@ -146,15 +154,26 @@ public class Affichage {
         System.out.println(" ");
 
     }
+
+    /**
+     * Afficher l'entête du tableau
+     */
     public static void afficherEntete(){
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
         System.out.println("*           *           *           * ");
     }
+    /**
+     * Afficher le séparateur du tableau
+     */
     public static void afficherSeparateur(){
         System.out.println("*           *           *           * ");
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
         System.out.println("*           *           *           * ");
     }
+
+    /**
+     * Afficher le footer du tableau
+     */
     public static void afficherFooter(){
         System.out.println("*           *           *           * ");
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");

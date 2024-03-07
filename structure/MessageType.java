@@ -10,15 +10,25 @@ public enum MessageType {
     SCORE_JOUEUR("Score du joueur "),
     VICTOIRE_JOUEUR("Victoire du joueur ");
 
+    /** Message associé au code */
     private String message;
 
+    /** Constructeur de la classe */
     MessageType(String message){
         this.message = message;
     }
 
+    /**
+     * Permet d'afficher le message correspondant pour un code de message donné
+     */
     public void afficherMessage(){
         System.out.print(this.message);
     }
+
+    /**
+     * Permet de récupérer le message pour le réutiliser pour un code de message donné
+     * @return this.message : la valeur du message associé au code
+     */
     public String getMessage(){
         return this.message;
     }
