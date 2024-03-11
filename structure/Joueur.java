@@ -87,8 +87,4 @@ public class Joueur {
         return 0;
     }
 
-    public void setScore(int valeur) {
-        score = valeur;
-    }
-
 }

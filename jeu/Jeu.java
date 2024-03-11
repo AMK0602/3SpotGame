@@ -47,8 +47,6 @@ public class Jeu {
                 jouerCoup(listeJoueur[2], calcul, tableJeu, affichage);
             }
             affichage.afficherScores(listeJoueur[0], listeJoueur[1]);
-            listeJoueur[1].setScore(7);
-            listeJoueur[0].setScore(13);
         }
         System.out.println(getGagnant(listeJoueur[0],listeJoueur[1]));
         affichage.afficherGagnant(getGagnant(listeJoueur[0],listeJoueur[1]));
@@ -83,7 +81,7 @@ public class Jeu {
      * @param joueur2 le second joueur
      * @return joueur1 ou joueur2 en fonction du vainqueur
      */
-    public Joueur getGagnant(Joueur joueur1, Joueur joueur2){
+    public static Joueur getGagnant(Joueur joueur1, Joueur joueur2){
         if((joueur1.getScore() >= MAX_POINT && joueur2.getScore() >= MIN_ENNEMI_POINT) || (joueur2.getScore()>=MAX_POINT && joueur1.getScore()<MIN_ENNEMI_POINT)){
             return joueur1;
         } else {
