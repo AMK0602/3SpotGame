@@ -15,18 +15,19 @@ public class Joueur {
     /** Compteur du nombre de joueur dans la partie */
     private static int nbJoueur = 0;
 
-    /** Constructeur de la Class */
+    /** Constructeur de la Classe */
     public Joueur(EtatCase couleur) {
         this.score = 0;
         this.couleur = couleur;
         ++nbJoueur;
         this.identifiant = nbJoueur;
     }
+    /** Constructeur de la Classe */
     public Joueur(){
         this.score = 0;
         this.couleur = EtatCase.NEUTRE;
-        this.identifiant = nbJoueur;
         ++nbJoueur;
+        this.identifiant = nbJoueur;
     }
 
     /**
@@ -70,7 +71,6 @@ public class Joueur {
         return this.couleur == j.couleur;
     }
 
-
     /**
      * Fonction qui permet de saisir le numéro d'un mouvement possible
      * @return resultat si le nombre est un entier, saisirDeplacement() si il y a une erreur de format
@@ -85,6 +85,10 @@ public class Joueur {
             saisirDeplacement();
         }
         return 0;
+    }
+
+    public void setScore(int valeur) {
+        score = valeur;
     }
 
 }

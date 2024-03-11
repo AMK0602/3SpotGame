@@ -17,12 +17,12 @@ public class Initialiser {
         Joueur[] listeJoueur = new Joueur[Jeu.NB_MAX_JOUEUR+1];
         MessageType.CHOIX_COULEUR.afficherMessage();
         listeJoueur[0] = new Joueur(saisirCouleur());
-        listeJoueur[2] = new Joueur();
         if(listeJoueur[0].getColor() == EtatCase.ROUGE){
             listeJoueur[1] = new Joueur(EtatCase.BLEU);
         } else {
             listeJoueur[1] = new Joueur(EtatCase.ROUGE);
         }
+        listeJoueur[2] = new Joueur();
         return listeJoueur;
     }
 

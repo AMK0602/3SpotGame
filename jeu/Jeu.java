@@ -24,6 +24,8 @@ public class Jeu {
     private Joueur[] listeJoueur;
     /** La liste des pions rapportant des points */
     private Pion[] listePion;
+    private Affichage affichage;
+    private Calcul calcul;
 
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu, d'une partie
@@ -34,7 +36,7 @@ public class Jeu {
         listePion = initPion();
 
         Calcul calcul = new Calcul(this);
-        Affichage affichage = new Affichage(this);
+        affichage = new Affichage(this);
 
         while(!jeuTermine(listeJoueur)){
             for(int i=0; i<listeJoueur.length-1;++i){
@@ -45,9 +47,11 @@ public class Jeu {
                 jouerCoup(listeJoueur[2], calcul, tableJeu, affichage);
             }
             affichage.afficherScores(listeJoueur[0], listeJoueur[1]);
-
+            listeJoueur[1].setScore(7);
+            listeJoueur[0].setScore(13);
         }
-        affichage.afficherGagnant();
+        System.out.println(getGagnant(listeJoueur[0],listeJoueur[1]));
+        affichage.afficherGagnant(getGagnant(listeJoueur[0],listeJoueur[1]));
     }
 
     /**
@@ -58,10 +62,8 @@ public class Jeu {
      * @param affichage fait référence à notre classe Affichage
      */
     public static void jouerCoup(Joueur joueur, Calcul calcul, EtatCase[][] tableJeu, Affichage affichage){
-        //TODO a simplifier
         /** La listes des mouvements possibles avec les positions des cases */
         LinkedList<Combinaison> listeCombinaison = calcul.calcDeplacementPossible(tableJeu, joueur);
-
         affichage.afficherTable(listeCombinaison);
         affichage.afficherDeplacements(listeCombinaison);
         deplacerPiece(tableJeu, calcul, listeCombinaison,joueur.saisirDeplacement(),joueur);
@@ -72,7 +74,7 @@ public class Jeu {
      * @return true si un joueur à gagné la portie
      */
     public static boolean jeuTermine(Joueur[] listeJoueur){
-        return listeJoueur[0].getScore() >= MAX_POINT || listeJoueur[1].getScore() >= 12;
+        return listeJoueur[0].getScore() >= MAX_POINT || listeJoueur[1].getScore() >= MAX_POINT;
     }
 
     /**
@@ -82,12 +84,11 @@ public class Jeu {
      * @return joueur1 ou joueur2 en fonction du vainqueur
      */
     public Joueur getGagnant(Joueur joueur1, Joueur joueur2){
-        if((joueur1.getScore() >= Jeu.MAX_POINT && joueur2.getScore() >=Jeu.MIN_ENNEMI_POINT) || (joueur2.getScore()>=MAX_POINT && joueur1.getScore()<MIN_ENNEMI_POINT)){
+        if((joueur1.getScore() >= MAX_POINT && joueur2.getScore() >= MIN_ENNEMI_POINT) || (joueur2.getScore()>=MAX_POINT && joueur1.getScore()<MIN_ENNEMI_POINT)){
             return joueur1;
-        } else if ((joueur1.getScore() < Jeu.MIN_ENNEMI_POINT && joueur2.getScore() >= Jeu.MAX_POINT) || (joueur1.getScore()>=MAX_POINT && joueur2.getScore()<MIN_ENNEMI_POINT)){
+        } else {
             return joueur2;
         }
-        return null;
     }
 
     /**
@@ -98,7 +99,7 @@ public class Jeu {
      * @param noDeplacement le numéro du mouvement indiqué
      * @param joueur le joueur à qui c'est le tour
      */
-    public static void deplacerPiece(EtatCase[][] tableJeu, Calcul calcul, LinkedList<Combinaison> listeCombinaison, int noDeplacement, Joueur joueur) {
+    public static void deplacerPiece(EtatCase[][] tableJeu, Calcul calcul,LinkedList<Combinaison> listeCombinaison, int noDeplacement, Joueur joueur) {
         if(calcul.isDeplacementPossible(noDeplacement,listeCombinaison)){
             for (int i = 0; i < tableJeu.length; i++) {
                 for (int j = 0; j < tableJeu.length; j++) {

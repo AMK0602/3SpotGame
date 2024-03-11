@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class Affichage {
     /** Permet de récupérer en paramètre notre classe principale */
-    private static Jeu jeu; // Référence à la classe Jeu
+    private Jeu jeu; // Référence à la classe Jeu
 
     /** Constructeur de la classe */
     public Affichage(Jeu jeu) {
@@ -136,8 +136,8 @@ public class Affichage {
     /**
      * Permet d'afficher le message de victoire d'un joueur
      */
-    public void afficherGagnant(){
-        System.out.println(MessageType.VICTOIRE_JOUEUR.getMessage()+ jeu.getGagnant(jeu.getListeJoueur()[0],jeu.getListeJoueur()[1] ).getIdentifiant());
+    public void afficherGagnant(Joueur joueur){
+        System.out.println(MessageType.VICTOIRE_JOUEUR.getMessage()+ joueur.getIdentifiant());
     }
 
     /**
