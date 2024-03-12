@@ -1,38 +1,33 @@
 package tests;
 
+import jeu.Calcul;
 import jeu.Jeu;
 import org.junit.jupiter.api.Test;
+import structure.Combinaison;
 import structure.EtatCase;
 import structure.Joueur;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+
+import static jeu.Calcul.calcDeplacementPossible;
 import static jeu.Initialiser.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class GestionJeuTest {
+class JeuTest {
 
-    /** Test de la création de deux joueurs avec 2 couleurs différentes **/
-    @Test
-    public void testCreationJoueur(){
-        Joueur j1 = new Joueur(EtatCase.ROUGE);
-        Joueur j2 = new Joueur(EtatCase.ROUGE);
-        assertEquals(j1.getColor(),j2.getColor());
-        j2.setColor(EtatCase.BLEU);
-        assertNotEquals(j1.getColor(),j2.getColor());
-    }
-
+    /** Fonction pour vérifier le calcul des mouvements possibles par joueur */
     @Test
     public void testCalcMovement(){
-        /*EtatCase[][] tablejeu;
-        tablejeu = initTable();
-        ArrayList<Joueur> listejoueur = new ArrayList<Joueur>();
+        EtatCase[][] tablejeu = initTable();
         Joueur j1 = new Joueur(EtatCase.ROUGE);
         Joueur j2 = new Joueur(EtatCase.BLEU);
         j1.setColor(EtatCase.ROUGE);
         j2.setColor(EtatCase.BLEU);
-        listejoueur.add(j1);
-        listejoueur.add(j2);*/
-        //afficherDeplacements(calculcalcDeplacementPossible(tablejeu, j1));
+        LinkedList<Combinaison> listCombinaisonJ1 = calcDeplacementPossible(tablejeu, j1);
+        LinkedList<Combinaison> listCombinaisonJ2 = calcDeplacementPossible(tablejeu, j2);
+        assertNotEquals(listCombinaisonJ1, listCombinaisonJ2);
+        assertEquals(listCombinaisonJ1.size(),3);
+        assertEquals(listCombinaisonJ2.size(),3);
     }
 
     /**

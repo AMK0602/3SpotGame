@@ -44,7 +44,7 @@ public class Calcul {
      * @param joueur : le joueur dont on souhaite calculer les déplacement possibles
      * @return listCombinaison : la liste des combinaison possible qu'on a rempli
      */
-    public LinkedList<Combinaison> calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
+    public static LinkedList<Combinaison> calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
         /** Liste qui stocke les mouvements possibles d'un joueur */
         LinkedList<Combinaison> listCombinaison = new LinkedList<>();
         int compteur = 0;
