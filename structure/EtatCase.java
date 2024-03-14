@@ -1,5 +1,9 @@
 package structure;
 
+/**
+ * Enumération pour l'état possible des cases
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public enum EtatCase {
     ROUGE('R', "ROUGE"),
     BLEU('B', "BLEU"),

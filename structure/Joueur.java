@@ -1,10 +1,11 @@
 package structure;
 
-import jeu.Jeu;
-
-import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Classe relatif à un joueur
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Joueur {
     /** Identifiant du joueur */
     private int identifiant;

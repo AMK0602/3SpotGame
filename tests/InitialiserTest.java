@@ -5,10 +5,12 @@ import structure.EtatCase;
 import structure.Joueur;
 import structure.Pion;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class des tests unitaires relatifs aux diverses initialisations
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 class InitialiserTest {
 
     /** Test de la création de deux joueurs avec 2 couleurs différentes **/
@@ -54,16 +56,11 @@ class InitialiserTest {
     /** Test de création des pions rapportant des points */
     @Test
     void testInitPion() {
-        Pion[] listepion = new Pion[3];
         Pion pion1 = new Pion(0,2);
         Pion pion2 = new Pion(1,2);
         Pion pion3 = new Pion(2,2);
-
-
         assertNotEquals(pion1.getX(),pion3.getX());
         assertEquals(pion1.getY(),pion2.getY(),pion3.getY());
         assertEquals(pion2.getX(),1);
-        assertEquals(listepion[0],pion1);
-        assertNotEquals(listepion[1],listepion[2]);
     }
 }

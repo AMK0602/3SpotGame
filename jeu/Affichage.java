@@ -1,9 +1,12 @@
 package jeu;
 
 import structure.*;
-
 import java.util.LinkedList;
 
+/**
+ * Classe gérant les divers affichages du jeu
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Affichage {
     /** Permet de récupérer en paramètre notre classe principale */
     private Jeu jeu; // Référence à la classe Jeu
@@ -13,14 +16,12 @@ public class Affichage {
         this.jeu = jeu;
     }
 
-    //TODO debugguer et MAJ fonction
     /**
      * Permet d'afficher la table avec l'Etat de la table et les mouvement possible pour chaque joueur
      */
     public void afficherTable(LinkedList<Combinaison> listeMouvement){
         EtatCase[][] tablejeu = jeu.getTableJeu();
         Pion[] listePion = jeu.getListePion();
-
         afficherEntete();
         for(int i=0; i< tablejeu.length;++i){ // 0 ->2 : 0 1 2
             int nbMouvement = compteNbCombiParCase(listeMouvement,0,i);
@@ -64,7 +65,6 @@ public class Affichage {
         }
         System.out.println("*");
         afficherSeparateur();
-
         for(int i=0; i< tablejeu.length;++i){ // 0 ->2 : 0 1 2
             int nbMouvement = compteNbCombiParCase(listeMouvement,2,i);
             if(nbMouvement>1){
@@ -162,6 +162,7 @@ public class Affichage {
         System.out.println("*  *  *  *  *  *  *  *  *  *  *  *  * ");
         System.out.println("*           *           *           * ");
     }
+
     /**
      * Afficher le séparateur du tableau
      */

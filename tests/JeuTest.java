@@ -1,6 +1,5 @@
 package tests;
 
-import jeu.Calcul;
 import jeu.Jeu;
 import org.junit.jupiter.api.Test;
 import structure.Combinaison;
@@ -13,6 +12,10 @@ import static jeu.Calcul.calcDeplacementPossible;
 import static jeu.Initialiser.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class des tests unitaires relatifs au déroulement du jeu
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 class JeuTest {
 
     /** Fonction pour vérifier le calcul des mouvements possibles par joueur */

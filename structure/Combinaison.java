@@ -1,5 +1,9 @@
 package structure;
 
+/**
+ * Classe relatif aux combinaisons de cases
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Combinaison {
     /** Ligne de la première case */
     private int x1;

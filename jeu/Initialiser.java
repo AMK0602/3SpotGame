@@ -1,11 +1,15 @@
 package jeu;
-import java.util.Scanner;
 
+import java.util.Scanner;
 import structure.MessageType;
 import structure.EtatCase;
 import structure.Joueur;
 import structure.Pion;
 
+/**
+ * Classe contenant les fonctions permettant d'initialiser les tableau du jeu : la table, les joueurs et les pions
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Initialiser {
 
     /**

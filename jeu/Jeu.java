@@ -1,12 +1,13 @@
 package jeu;
 
 import structure.*;
-
 import java.util.LinkedList;
-
 import static jeu.Initialiser.*;
 
-
+/**
+ * Classe contenant les fonctions pour le bon déroulement du jeu
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Jeu {
     /** La taille maximale de la table de jeu */
     public static final int SIZE_MAX_TABLE = 3;
@@ -24,8 +25,9 @@ public class Jeu {
     private Joueur[] listeJoueur;
     /** La liste des pions rapportant des points */
     private Pion[] listePion;
+    /** La classe d'affichage */
     private Affichage affichage;
-    private Calcul calcul;
+
 
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu, d'une partie
@@ -34,10 +36,8 @@ public class Jeu {
         tableJeu = initTable();
         listeJoueur = initJoueurs();
         listePion = initPion();
-
-        Calcul calcul = new Calcul(this);
+        Calcul calcul = new Calcul();
         affichage = new Affichage(this);
-
         while(!jeuTermine(listeJoueur)){
             for(int i=0; i<listeJoueur.length-1;++i){
                 System.out.println("Joueur "+ listeJoueur[i].getColor().getNomPiece()+ " - Piece " + listeJoueur[i].getColor().getAlias());
@@ -118,12 +118,6 @@ public class Jeu {
      * @return tablejeu : la table de jeu
      */
     public EtatCase[][] getTableJeu(){ return tableJeu; }
-
-    /**
-     * Permet de récupérer la liste des joueurs qui jouent
-     * @return listeJoueur : la liste des joueurs qui jouent
-     */
-    public Joueur[] getListeJoueur(){ return listeJoueur; }
 
     /**
      * Permet de récupérer la liste qui contient les pions rapportant des points

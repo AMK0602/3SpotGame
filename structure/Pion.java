@@ -1,5 +1,9 @@
 package structure;
 
+/**
+ * Classe relatif aux pions rapportant des points
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Pion {
     /** Ligne de la case */
     private int x;
