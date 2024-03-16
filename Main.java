@@ -1,5 +1,9 @@
 import jeu.Jeu;
 
+/**
+ * Classe principale du jeu
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Main {
 
     /**

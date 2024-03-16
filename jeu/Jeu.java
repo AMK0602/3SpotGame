@@ -1,12 +1,13 @@
 package jeu;
 
 import structure.*;
-
 import java.util.LinkedList;
-
 import static jeu.Initialiser.*;
 
-
+/**
+ * Classe contenant les fonctions pour le bon déroulement du jeu
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Jeu {
     /** La taille maximale de la table de jeu */
     public static final int SIZE_MAX_TABLE = 3;
@@ -24,8 +25,9 @@ public class Jeu {
     private Joueur[] listeJoueur;
     /** La liste des pions rapportant des points */
     private Pion[] listePion;
+    /** La classe d'affichage */
     private Affichage affichage;
-    private Calcul calcul;
+
 
     /**
      * Fonction principale qui permet de gérer le bon déroulement du jeu, d'une partie
@@ -34,10 +36,8 @@ public class Jeu {
         tableJeu = initTable();
         listeJoueur = initJoueurs();
         listePion = initPion();
-
-        Calcul calcul = new Calcul(this);
+        Calcul calcul = new Calcul();
         affichage = new Affichage(this);
-
         while(!jeuTermine(listeJoueur)){
             for(int i=0; i<listeJoueur.length-1;++i){
                 System.out.println("Joueur "+ listeJoueur[i].getColor().getNomPiece()+ " - Piece " + listeJoueur[i].getColor().getAlias());
@@ -47,8 +47,6 @@ public class Jeu {
                 jouerCoup(listeJoueur[2], calcul, tableJeu, affichage);
             }
             affichage.afficherScores(listeJoueur[0], listeJoueur[1]);
-            listeJoueur[1].setScore(7);
-            listeJoueur[0].setScore(13);
         }
         System.out.println(getGagnant(listeJoueur[0],listeJoueur[1]));
         affichage.afficherGagnant(getGagnant(listeJoueur[0],listeJoueur[1]));
@@ -83,7 +81,7 @@ public class Jeu {
      * @param joueur2 le second joueur
      * @return joueur1 ou joueur2 en fonction du vainqueur
      */
-    public Joueur getGagnant(Joueur joueur1, Joueur joueur2){
+    public static Joueur getGagnant(Joueur joueur1, Joueur joueur2){
         if((joueur1.getScore() >= MAX_POINT && joueur2.getScore() >= MIN_ENNEMI_POINT) || (joueur2.getScore()>=MAX_POINT && joueur1.getScore()<MIN_ENNEMI_POINT)){
             return joueur1;
         } else {
@@ -120,12 +118,6 @@ public class Jeu {
      * @return tablejeu : la table de jeu
      */
     public EtatCase[][] getTableJeu(){ return tableJeu; }
-
-    /**
-     * Permet de récupérer la liste des joueurs qui jouent
-     * @return listeJoueur : la liste des joueurs qui jouent
-     */
-    public Joueur[] getListeJoueur(){ return listeJoueur; }
 
     /**
      * Permet de récupérer la liste qui contient les pions rapportant des points

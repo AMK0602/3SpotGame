@@ -5,39 +5,32 @@ import structure.EtatCase;
 import structure.Joueur;
 import structure.Pion;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class des tests unitaires relatifs aux diverses initialisations
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 class InitialiserTest {
 
+    /** Test de la création de deux joueurs avec 2 couleurs différentes **/
     @Test
-    void testInitJoueurs() {
-        /*ArrayList<Joueur> listejoueur = new ArrayList<Joueur>();
-        Joueur j1 = new Joueur(EtatCase.NEUTRE);
-        Joueur j2 = new Joueur(EtatCase.NEUTRE);
-        assertNull(j1.getColor());
-        assertNull(j2.getColor());
+    public void testCreationJoueur(){
+        Joueur j1 = new Joueur(EtatCase.ROUGE);
+        Joueur j2 = new Joueur(EtatCase.ROUGE);
+        Joueur j3 = new Joueur();
+        assertEquals(j1.getColor(),j2.getColor());
+        assertNotEquals(j1.getColor(),j3.getColor());
+        assertNotNull(j3.getColor());
+        assertEquals(j3.getColor(), EtatCase.NEUTRE);
+        j2.setColor(EtatCase.BLEU);
         assertEquals(j1.getScore(),0);
         assertEquals(j2.getScore(),0);
-        listejoueur.add(j1);
-        listejoueur.add(j2);
-        assertEquals(listejoueur.size(),2);*/
+        assertEquals(j3.getScore(),0);
+        assertNotEquals(j1.getColor(),j2.getColor());
     }
 
-    @Test
-    void testSaisirCouleur() {
-        /*Joueur j1 = new Joueur(EtatCase.NEUTRE);
-        Joueur j2 = new Joueur(EtatCase.NEUTRE);
-        assertNull(j1.getColor());
-        assertNull(j2.getColor());
-        j1.setColor(EtatCase.BLEU);
-        j2.setColor(EtatCase.ROUGE);
-        assertNotNull(j1.getColor());
-        assertNotNull(j2.getColor());
-        assertNotEquals(j1.getColor(),j2.getColor());*/
-    }
-
+    /** Test de la création et du remplissage de la table de jeu */
     @Test
     void testInitTable() {
         EtatCase[][] table = new EtatCase[3][3];
@@ -60,18 +53,14 @@ class InitialiserTest {
         assertEquals(table[0][0].getAlias(), ' ');
     }
 
+    /** Test de création des pions rapportant des points */
     @Test
     void testInitPion() {
-        Pion[] listepion = new Pion[3];
         Pion pion1 = new Pion(0,2);
         Pion pion2 = new Pion(1,2);
         Pion pion3 = new Pion(2,2);
-
-
         assertNotEquals(pion1.getX(),pion3.getX());
         assertEquals(pion1.getY(),pion2.getY(),pion3.getY());
         assertEquals(pion2.getX(),1);
-        assertEquals(listepion[0],pion1);
-        assertNotEquals(listepion[1],listepion[2]);
     }
 }

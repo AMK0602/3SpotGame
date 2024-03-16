@@ -1,5 +1,9 @@
 package structure;
 
+/**
+ * Enumération pour les messages types du jeu
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public enum MessageType {
     ERR_COULEUR_UTILISE("Couleur déjà utilisé ! Saisissez une couleur valide ! "),
     ERR_COULEUR_INEXISTANTE("Couleur incorrect, ré-essayez : "),
@@ -32,5 +36,4 @@ public enum MessageType {
     public String getMessage(){
         return this.message;
     }
-    //TODO FONCTION SPECIFIQUE AFFICHAGE ERREUR
 }

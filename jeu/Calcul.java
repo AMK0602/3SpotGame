@@ -4,19 +4,14 @@ import structure.Combinaison;
 import structure.EtatCase;
 import structure.Joueur;
 import structure.Pion;
-
 import java.util.LinkedList;
-
 import static structure.Combinaison.estAdjacent;
 
+/**
+ * Classe contenant les calculs important nécéssaire au bon déroulement du jeu
+ * @author HOUY Ethan - KHABBAZ Amine
+ */
 public class Calcul {
-    /** Référence à la classe Jeu */
-    private static Jeu jeu;
-
-    /** Constructeur de la classe */
-    public Calcul(Jeu jeu) {
-        this.jeu = jeu;
-    }
 
     /**
      * Fonction qui permet de vérifier qu'un mouvement est possible entre 2 cases
@@ -44,7 +39,7 @@ public class Calcul {
      * @param joueur : le joueur dont on souhaite calculer les déplacement possibles
      * @return listCombinaison : la liste des combinaison possible qu'on a rempli
      */
-    public LinkedList<Combinaison> calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
+    public static LinkedList<Combinaison> calcDeplacementPossible(EtatCase[][] table, Joueur joueur) {
         /** Liste qui stocke les mouvements possibles d'un joueur */
         LinkedList<Combinaison> listCombinaison = new LinkedList<>();
         int compteur = 0;
@@ -96,7 +91,6 @@ public class Calcul {
         }
         return false;
     }
-
 
     /**
      * Permet de vérifier qu'un déplacement saisi par le joueur existe réellement
